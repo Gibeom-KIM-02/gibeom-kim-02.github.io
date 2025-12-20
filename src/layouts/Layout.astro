@@ -2,14 +2,14 @@
 type Props = {
   title?: string;
   description?: string;
-  ogImage?: string;   // e.g. "/og.png" or "/projects/profile.jpg"
+  ogImage?: string;   // e.g. "/og.png" or "/profile.jpg"
   noindex?: boolean;
 };
 
 const {
   title = "Gibeom Kim",
   description = "Personal website of Gibeom Kim.",
-  ogImage = "/projects/profile.jpg",  // 일단 프로필 사진으로 기본값
+  ogImage = "/profile.jpg",  // ✅ 기본 OG 이미지는 /profile.jpg가 안전
   noindex = false,
 } = Astro.props;
 
@@ -17,12 +17,12 @@ const site = Astro.site; // astro.config.mjs의 site 값 사용
 const canonical = site ? new URL(Astro.url.pathname, site).toString() : undefined;
 const ogAbs = site ? new URL(ogImage, site).toString() : ogImage;
 
-// JSON-LD (Person) - 필요하면 수정
+// JSON-LD (Person)
 const personJsonLd = {
   "@context": "https://schema.org",
   "@type": "Person",
   name: "Gibeom Kim",
-  url: canonical ? new URL("/", canonical).toString() : undefined,
+  url: site ? new URL("/", site).toString() : undefined,
   sameAs: [
     "https://github.com/Gibeom-KIM-02",
   ],
@@ -42,23 +42,28 @@ const personJsonLd = {
     <title>{title}</title>
     <meta name="description" content={description} />
 
+    <!-- ✅ Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <!-- (선택) PNG도 같이 두면 더 안정적: public/favicon.png 만들면 됨 -->
+    <!-- <link rel="icon" type="image/png" href="/favicon.png" sizes="32x32" /> -->
+
     {canonical && <link rel="canonical" href={canonical} />}
     {noindex && <meta name="robots" content="noindex,nofollow" />}
 
-    {/* Open Graph */}
+    <!-- Open Graph -->
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     {canonical && <meta property="og:url" content={canonical} />}
     <meta property="og:image" content={ogAbs} />
 
-    {/* Twitter */}
+    <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogAbs} />
 
-    {/* Structured Data */}
+    <!-- Structured Data -->
     <script type="application/ld+json">
       {JSON.stringify(personJsonLd)}
     </script>
