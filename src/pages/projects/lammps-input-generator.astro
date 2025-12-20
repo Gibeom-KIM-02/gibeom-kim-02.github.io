@@ -1,0 +1,112 @@
+---
+import Layout from "../../layouts/Layout.astro";
+
+const title = "LAMMPS Input Generator";
+const period = "2025";
+const tags = ["LAMMPS", "MD", "Automation", "Reproducibility"];
+const repo = "https://github.com/Gibeom-KIM-02/lammps_input_generator";
+
+// Optional image: public/projects/lammps-input-generator.png
+const heroImage = "";
+---
+
+<Layout title={`${title} — Gibeom Kim`} description="A configurable generator to build reproducible LAMMPS inputs for simulation workflows.">
+  <a class="back" href="/projects">← Back to Projects</a>
+
+  <header class="hero">
+    <div class="titleRow">
+      <h1>{title}</h1>
+      <span class="muted">{period}</span>
+    </div>
+
+    <div class="tags">
+      {tags.map((t) => <span class="pill">{t}</span>)}
+    </div>
+
+    <p class="lead">
+      A small tool project to reduce repetitive manual editing when running LAMMPS simulations.
+      The goal is to generate consistent, reusable input files from a structured configuration.
+    </p>
+
+    <div class="btns">
+      <a class="btn primary" href={repo} target="_blank" rel="noreferrer">GitHub</a>
+    </div>
+  </header>
+
+  <section class="sec">
+    <h2>What it does</h2>
+    <div class="card">
+      <ul class="muted list">
+        <li>Generates LAMMPS input files from configurable settings.</li>
+        <li>Helps standardize simulation runs for reproducibility.</li>
+        <li>Minimizes copy-paste mistakes by keeping parameters structured.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="sec">
+    <h2>My role</h2>
+    <div class="card">
+      <p class="muted">
+        Designed the configuration-driven structure and implemented the generator workflow.
+        Organized typical simulation settings so they can be reused across systems.
+      </p>
+    </div>
+  </section>
+
+  {heroImage ? (
+    <section class="sec">
+      <h2>Figure</h2>
+      <p class="muted">
+        Optional screenshot/diagram. Place it at <code>public/projects/lammps-input-generator.png</code>.
+      </p>
+      <div class="imgWrap">
+        <img src={heroImage} alt="LAMMPS Input Generator figure" loading="lazy" />
+      </div>
+    </section>
+  ) : null}
+
+  <section class="sec">
+    <h2>How to use</h2>
+    <div class="card">
+      <pre><code>git clone {repo}
+cd lammps_input_generator</code></pre>
+      <p class="muted" style="margin-top:10px;">
+        See the repository README for the exact CLI / config format and examples.
+      </p>
+    </div>
+  </section>
+
+  <style>
+    .back { display:inline-block; margin: 8px 0 18px; text-decoration:none; font-size: 13px; opacity: .8; }
+    .back:hover { text-decoration: underline; }
+
+    .hero { padding: 6px 0 18px; }
+    .titleRow { display:flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; align-items: baseline; }
+
+    h1 { margin: 0; font-size: 26px; letter-spacing: -0.02em; }
+    h2 { margin: 0 0 10px; font-size: 18px; }
+
+    .lead { margin: 10px 0 0; max-width: 80ch; opacity: .85; }
+    .muted { opacity: .75; font-size: 13px; margin: 6px 0; }
+
+    .btns { display:flex; gap: 10px; flex-wrap: wrap; margin-top: 14px; }
+    .btn { border: 1px solid #ddd; padding: 10px 12px; border-radius: 10px; text-decoration: none; font-size: 14px; }
+    .btn.primary { background: #111; color: #fff; border-color: #111; }
+
+    .sec { padding: 16px 0; }
+    .card { border: 1px solid #e7e7e7; border-radius: 14px; padding: 14px; background: #fff; }
+
+    .tags { display:flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+    .pill { font-size: 12px; border: 1px solid #eee; padding: 4px 8px; border-radius: 999px; opacity: .85; }
+
+    .list { margin: 8px 0 0; padding-left: 18px; }
+    .list li { margin: 6px 0; }
+
+    pre { margin: 8px 0 0; padding: 10px 12px; border-radius: 12px; background: #fafafa; border: 1px solid #eee; overflow:auto; }
+    code { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace; font-size: 12px; }
+
+    .imgWrap { border: 1px solid #e7e7e7; border-radius: 14px; overflow: hidden; background: #fff; }
+    .imgWrap img { width: 100%; height: auto; display:block; }
+  </style>
+</Layout>

@@ -1,0 +1,112 @@
+---
+import Layout from "../../layouts/Layout.astro";
+
+const title = "Predicting Bandgap of Hexanary Oxides (CGCNN)";
+const period = "2025";
+const tags = ["Materials ML", "CGCNN", "Bandgap", "Python"];
+const repo = "https://github.com/Gibeom-KIM-02/Predicting-bandgap-of-Hexanary-oxide";
+
+// Optional image: public/projects/bandgap-cgcnn.png
+const heroImage = "";
+---
+
+<Layout title={`${title} — Gibeom Kim`} description="Trained and evaluated a CGCNN-based model to predict bandgaps of hexanary oxides.">
+  <a class="back" href="/projects">← Back to Projects</a>
+
+  <header class="hero">
+    <div class="titleRow">
+      <h1>{title}</h1>
+      <span class="muted">{period}</span>
+    </div>
+
+    <div class="tags">
+      {tags.map((t) => <span class="pill">{t}</span>)}
+    </div>
+
+    <p class="lead">
+      A materials ML project where I trained and evaluated a CGCNN-based model to predict bandgaps of hexanary oxides.
+      The focus was building a clean workflow from structure data → model training → evaluation.
+    </p>
+
+    <div class="btns">
+      <a class="btn primary" href={repo} target="_blank" rel="noreferrer">GitHub</a>
+    </div>
+  </header>
+
+  <section class="sec">
+    <h2>What I did</h2>
+    <div class="card">
+      <ul class="muted list">
+        <li>Prepared structure datasets and organized train/validation/test splits.</li>
+        <li>Implemented a reproducible training/evaluation pipeline for CGCNN experiments.</li>
+        <li>Tracked results to compare model performance across settings.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="sec">
+    <h2>Why it matters</h2>
+    <div class="card">
+      <p class="muted">
+        Bandgap is a key screening property for photocatalyst candidates.
+        This project helped me practice ML workflows in materials: data handling, training loops, and evaluation discipline.
+      </p>
+    </div>
+  </section>
+
+  {heroImage ? (
+    <section class="sec">
+      <h2>Figure</h2>
+      <p class="muted">
+        Optional figure (e.g., parity plot of predicted vs. target bandgaps). Place it at <code>public/projects/bandgap-cgcnn.png</code>.
+      </p>
+      <div class="imgWrap">
+        <img src={heroImage} alt="Bandgap CGCNN figure" loading="lazy" />
+      </div>
+    </section>
+  ) : null}
+
+  <section class="sec">
+    <h2>How to run</h2>
+    <div class="card">
+      <pre><code>git clone {repo}
+cd Predicting-bandgap-of-Hexanary-oxide</code></pre>
+      <p class="muted" style="margin-top:10px;">
+        See the repository README for environment setup and training commands.
+      </p>
+    </div>
+  </section>
+
+  <style>
+    .back { display:inline-block; margin: 8px 0 18px; text-decoration:none; font-size: 13px; opacity: .8; }
+    .back:hover { text-decoration: underline; }
+
+    .hero { padding: 6px 0 18px; }
+    .titleRow { display:flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; align-items: baseline; }
+
+    h1 { margin: 0; font-size: 26px; letter-spacing: -0.02em; }
+    h2 { margin: 0 0 10px; font-size: 18px; }
+
+    .lead { margin: 10px 0 0; max-width: 80ch; opacity: .85; }
+    .muted { opacity: .75; font-size: 13px; margin: 6px 0; }
+
+    .btns { display:flex; gap: 10px; flex-wrap: wrap; margin-top: 14px; }
+    .btn { border: 1px solid #ddd; padding: 10px 12px; border-radius: 10px; text-decoration: none; font-size: 14px; }
+    .btn.primary { background: #111; color: #fff; border-color: #111; }
+
+    .sec { padding: 16px 0; }
+    .card { border: 1px solid #e7e7e7; border-radius: 14px; padding: 14px; background: #fff; }
+
+    .tags { display:flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+    .pill { font-size: 12px; border: 1px solid #eee; padding: 4px 8px; border-radius: 999px; opacity: .85; }
+
+    .list { margin: 8px 0 0; padding-left: 18px; }
+    .list li { margin: 6px 0; }
+
+    pre { margin: 8px 0 0; padding: 10px 12px; border-radius: 12px; background: #fafafa; border: 1px solid #eee; overflow:auto; }
+    code { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace; font-size: 12px; }
+
+    .imgWrap { border: 1px solid #e7e7e7; border-radius: 14px; overflow: hidden; background: #fff; }
+    .imgWrap img { width: 100%; height: auto; display:block; }
+  </style>
+</Layout>
