@@ -9,23 +9,25 @@ type Props = {
 const {
   title = "Gibeom Kim",
   description = "Personal website of Gibeom Kim.",
-  ogImage = "/profile.jpg",  // ✅ 기본 OG 이미지는 /profile.jpg가 안전
+  ogImage = "/og.png",          // ✅ 기본 OG 이미지는 PNG로 고정
   noindex = false,
 } = Astro.props;
 
 const site = Astro.site; // astro.config.mjs의 site 값 사용
+
+// canonical은 "사이트의 실제 주소" 기준으로 만드는 게 SEO에 유리
 const canonical = site ? new URL(Astro.url.pathname, site).toString() : undefined;
+
+// og:image는 가급적 absolute URL이 안정적
 const ogAbs = site ? new URL(ogImage, site).toString() : ogImage;
 
-// JSON-LD (Person)
+// JSON-LD (Person) - 최소 구성
 const personJsonLd = {
   "@context": "https://schema.org",
   "@type": "Person",
   name: "Gibeom Kim",
   url: site ? new URL("/", site).toString() : undefined,
-  sameAs: [
-    "https://github.com/Gibeom-KIM-02",
-  ],
+  sameAs: ["https://github.com/Gibeom-KIM-02"],
   affiliation: {
     "@type": "CollegeOrUniversity",
     name: "UNIST",
@@ -39,29 +41,47 @@ const personJsonLd = {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
+
     <title>{title}</title>
     <meta name="description" content={description} />
 
-    <!-- ✅ Favicon -->
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <!-- (선택) PNG도 같이 두면 더 안정적: public/favicon.png 만들면 됨 -->
-    <!-- <link rel="icon" type="image/png" href="/favicon.png" sizes="32x32" /> -->
+    <!-- ✅ (선택) 브라우저 기본 보안/미관 -->
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta name="theme-color" content="#0b1020" />
+
+    <!-- ✅ Favicon (PNG only) -->
+    <!-- 같은 PNG 한 장을 여러 sizes로 선언해도 브라우저가 알아서 downscale 함 -->
+    <link rel="icon" href="/favicon.png" type="image/png" sizes="32x32" />
+    <link rel="icon" href="/favicon.png" type="image/png" sizes="16x16" />
+    <link rel="apple-touch-icon" href="/favicon.png" />
 
     {canonical && <link rel="canonical" href={canonical} />}
-    {noindex && <meta name="robots" content="noindex,nofollow" />}
+
+    <!-- robots meta는 옵션: noindex일 때만 명확히 막아주기 -->
+    {noindex ? (
+      <meta name="robots" content="noindex,nofollow" />
+    ) : (
+      <meta name="robots" content="index,follow" />
+    )}
 
     <!-- Open Graph -->
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Gibeom Kim" />
+    <meta property="og:locale" content="en_US" />
     {canonical && <meta property="og:url" content={canonical} />}
     <meta property="og:image" content={ogAbs} />
+    <meta property="og:image:alt" content="Gibeom Kim — personal website preview" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogAbs} />
+    <meta name="twitter:image:alt" content="Gibeom Kim — personal website preview" />
 
     <!-- Structured Data -->
     <script type="application/ld+json">
@@ -77,11 +97,20 @@ const personJsonLd = {
 </html>
 
 <style>
+  /* 기본 리셋 + 가독성 */
   html, body { margin: 0; width: 100%; height: 100%; }
+  * { box-sizing: border-box; }
+
+  body {
+    font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+    line-height: 1.5;
+    color: #111;
+    background: #fff;
+  }
 
   .container{
-    max-width: 1110px;      /* 페이지 최대 폭 */
-    margin: 0 auto;        /* 가운데 정렬 */
-    padding: 36px 22px;    /* 상하 28px, 좌우 18px 여백 */
+    max-width: 1110px;     /* 페이지 최대 폭 */
+    margin: 0 auto;       /* 가운데 정렬 */
+    padding: 36px 22px;   /* 상하 36px, 좌우 22px 여백 */
   }
 </style>
