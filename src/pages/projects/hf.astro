@@ -1,16 +1,17 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 
-const title = "LAMMPS Input Generator";
+const title = "Hartree–Fock in Python (Midterm Replacement Project)";
 const period = "2025";
-const tags = ["LAMMPS", "MD", "Automation", "Reproducibility"];
-const repo = "https://github.com/Gibeom-KIM-02/lammps_input_generator";
+const tags = ["Quantum Chemistry", "Hartree–Fock", "Python"];
+const repo = "https://github.com/Gibeom-KIM-02/hf";
 
-// Optional image: public/projects/lammps-input-generator.png
-const heroImage = "/projects/lammps-input-generator.png";
+// Optional: if you add an image, place it at public/projects/hf.png
+// If you leave this as an empty string, the image section will not show.
+const heroImage = "/projects/hf.png";
 ---
 
-<Layout title={`${title} — Gibeom Kim`} description="A configurable generator to build reproducible LAMMPS inputs for simulation workflows.">
+<Layout title={`${title} — Gibeom Kim`} description="Midterm replacement project: basic Hartree–Fock workflow in Python.">
   <a class="back" href="/projects">← Back to Projects</a>
 
   <header class="hero">
@@ -24,8 +25,8 @@ const heroImage = "/projects/lammps-input-generator.png";
     </div>
 
     <p class="lead">
-      A small tool project to reduce repetitive manual editing when running LAMMPS simulations.
-      The goal is to generate consistent, reusable input files from a structured configuration.
+      As a midterm replacement assignment, I implemented a basic Hartree–Fock (HF) workflow in Python and
+      validated it by computing the H–H binding energy.
     </p>
 
     <div class="btns">
@@ -34,23 +35,13 @@ const heroImage = "/projects/lammps-input-generator.png";
   </header>
 
   <section class="sec">
-    <h2>What it does</h2>
+    <h2>What I Did</h2>
     <div class="card">
       <ul class="muted list">
-        <li>Generates LAMMPS input files from configurable settings.</li>
-        <li>Helps standardize simulation runs for reproducibility.</li>
-        <li>Minimizes copy-paste mistakes by keeping parameters structured.</li>
+        <li>Implemented a simple HF pipeline and kept the code readable and modular.</li>
+        <li>Checked intermediate quantities (matrices/energies) to ensure the workflow behaves as expected.</li>
+        <li>Computed the H–H binding energy as a basic validation target.</li>
       </ul>
-    </div>
-  </section>
-
-  <section class="sec">
-    <h2>My role</h2>
-    <div class="card">
-      <p class="muted">
-        Designed the configuration-driven structure and implemented the generator workflow.
-        Organized typical simulation settings so they can be reused across systems.
-      </p>
     </div>
   </section>
 
@@ -58,21 +49,22 @@ const heroImage = "/projects/lammps-input-generator.png";
     <section class="sec">
       <h2>Figure</h2>
       <p class="muted">
-        Optional screenshot/diagram. Place it at <code>public/projects/lammps-input-generator.png</code>.
+        Optional figure (e.g., energy vs bond distance). Place it at <code>public/projects/hf.png</code>.
       </p>
       <div class="imgWrap">
-        <img src={heroImage} alt="LAMMPS Input Generator figure" loading="lazy" />
+        <img src={heroImage} alt="HF project figure" loading="lazy" />
       </div>
     </section>
   ) : null}
 
   <section class="sec">
-    <h2>How to use</h2>
+    <h2>How to Run</h2>
     <div class="card">
       <pre><code>git clone {repo}
-cd lammps_input_generator</code></pre>
+cd hf
+python HF_Driver.py</code></pre>
       <p class="muted" style="margin-top:10px;">
-        See the repository README for the exact CLI / config format and examples.
+        If your entry file name differs, replace <code>HF_Driver.py</code> with the correct script in the repo.
       </p>
     </div>
   </section>

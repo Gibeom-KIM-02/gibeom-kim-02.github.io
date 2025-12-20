@@ -1,0 +1,59 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { projects } from "../data/projects";
+---
+
+<Layout title="Projects — Gibeom Kim" description="Project portfolio of Gibeom Kim.">
+  <h1>Projects</h1>
+  <p class="muted">Selected projects with links to code and materials.</p>
+
+  <div class="list">
+    {projects.map((p) => (
+      <article class="card">
+        <div class="top">
+          <h2>{p.title}</h2>
+          <span class="muted">{p.period ?? ""}</span>
+        </div>
+
+        <p class="muted">{p.oneLiner}</p>
+        <p class="muted"><b>Role:</b> {p.role}</p>
+        <p class="muted"><b>Outcome:</b> {p.outcome}</p>
+
+        <div class="tags">
+          {p.tags.map((t) => <span class="pill">{t}</span>)}
+        </div>
+
+        <div class="btns">
+          {p.links.page && (
+            <a class="btn" href={p.links.page}>Details</a>
+          )}
+          {p.links.github && (
+            <a class="btn" href={p.links.github} target="_blank" rel="noreferrer">GitHub</a>
+          )}
+          {p.links.pdf && (
+            <a class="btn" href={p.links.pdf} target="_blank" rel="noreferrer">PDF</a>
+          )}
+          {p.links.demo && (
+            <a class="btn" href={p.links.demo} target="_blank" rel="noreferrer">Demo</a>
+          )}
+        </div>
+      </article>
+    ))}
+  </div>
+
+  <style>
+    h1 { margin: 0 0 8px; font-size: 28px; letter-spacing: -0.02em; }
+    h2 { margin: 0; font-size: 16px; }
+    .muted { opacity: 0.75; font-size: 13px; margin: 6px 0; }
+
+    .list { margin-top: 14px; }
+    .card { border: 1px solid #e7e7e7; border-radius: 14px; padding: 14px; margin: 10px 0; background: #fff; }
+    .top { display:flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+
+    .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+    .pill { font-size: 12px; border: 1px solid #eee; padding: 4px 8px; border-radius: 999px; opacity: 0.85; }
+
+    .btns { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 10px; }
+    .btn { border: 1px solid #ddd; padding: 8px 10px; border-radius: 10px; text-decoration: none; font-size: 13px; }
+  </style>
+</Layout>

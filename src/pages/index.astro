@@ -1,11 +1,204 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
+import { projects } from "../data/projects";
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const name = "Gibeom Kim";
+
+const tagline =
+  "Undergraduate researcher building reproducible simulation workflows for electrochemical interfaces and materials modeling.";
+
+const subtagline = `My goal is to become a researcher who learns steadily, works honestly, and contributes meaningfully.`;
+
+const featured = projects.slice(0, 3);
 ---
 
-<Layout>
-	<Welcome />
+<Layout
+  title={`${name} — Home`}
+  description="Personal website of Gibeom Kim. Research interests and featured projects."
+>
+  <section class="hero">
+    <div class="heroRow">
+      <img class="avatar" src="/profile.jpg" alt="Gibeom Kim" />
+      <div>
+        <h1>{name}</h1>
+        <p class="tag">{tagline}</p>
+        <p class="sub">{subtagline}</p>
+      </div>
+    </div>
+
+    <div class="btns">
+      <a class="btn primary" href="/projects">View projects</a>
+      <a class="btn" href="/cv.pdf" target="_blank" rel="noreferrer">Download CV</a>
+    </div>
+  </section>
+
+  <section class="sec">
+    <h2>About</h2>
+    <p class="muted">
+      I am an undergraduate student at UNIST, majoring in Energy and Chemical Engineering.
+      I enjoy building reproducible computational workflows—from simulation setup to analysis-ready results.
+      My current interests include electrochemical interfaces, molecular simulations, and materials machine learning.
+    </p>
+  </section>
+
+  <section class="sec">
+    <h2>Experience</h2>
+    <div class="exp">
+      <div class="expTop">
+        <b>Undergraduate Research Intern</b>
+        <span class="muted">
+          UNIST · Advisor: Prof. Seung-Jae Shin · Jan 2025 – Present
+        </span>
+      </div>
+
+      <ul class="expList muted">
+        <li>
+          Built an automated MD workflow (LAMMPS + ligpargen/OPLS) covering setup → runs → post-processing,
+          including MDAnalysis-based RDF/CN calculation with trajectory visualization.
+        </li>
+        <li>
+          Performed constant-potential MD (CPM) studies of electrode–electrolyte interfaces; ongoing collaboration with
+          Prof. Hyun-Kon Song’s group at UNIST.
+        </li>
+        <li>
+          Ran baseline DFT calculations (binding energies, solvation effects) and used DFT-based MLFF (MACE-OFF)
+          for rapid structure optimization; validated energies via LAMMPS single-point evaluations.
+        </li>
+        <li>
+          Contributed to the “Computational Materials Science” course by helping develop Hands-on Session #12 and
+          authoring supporting documentation/tutorial materials.
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="sec">
+    <h2>Research Interests</h2>
+    <p class="muted">
+      Electrochemical interfaces · molecular simulations (MD) · materials machine learning
+      <br />
+      Reproducible workflows · automation · validation and analysis
+    </p>
+  </section>
+
+  <section class="sec">
+    <div class="secHead">
+      <h2>Featured Projects</h2>
+      <a class="smallLink" href="/projects">See all →</a>
+    </div>
+
+    <div class="grid">
+      {featured.map((p) => (
+        <article class="card">
+          <div class="cardTop">
+            <h3>{p.title}</h3>
+            <span class="muted">{p.period ?? ""}</span>
+          </div>
+
+          <p class="muted">{p.oneLiner}</p>
+          <p class="muted outcome"><b>Outcome:</b> {p.outcomeShort ?? p.outcome}</p>
+
+          <div class="tags">
+            {p.tags.slice(0, 4).map((t) => <span class="pill">{t}</span>)}
+          </div>
+
+          <div class="btns small">
+            {p.links.page && (
+              <a class="btn" href={p.links.page}>Details</a>
+            )}
+            {p.links.github && (
+              <a class="btn" href={p.links.github} target="_blank" rel="noreferrer">GitHub</a>
+            )}
+            {p.links.pdf && (
+              <a class="btn" href={p.links.pdf} target="_blank" rel="noreferrer">PDF</a>
+            )}
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="sec">
+    <h2>Contact</h2>
+    <p class="muted">
+      Email: <a href="mailto:kkb1198@unist.ac.kr">kkb1198@unist.ac.kr</a>
+      {" "}· GitHub:{" "}
+      <a href="https://github.com/Gibeom-KIM-02" target="_blank" rel="noreferrer">Gibeom-KIM-02</a>
+    </p>
+  </section>
+
+  <style>
+    .heroRow { display: flex; gap: 14px; align-items: center; }
+    .avatar{
+      width: 110px;
+      height: 110px;
+      border-radius: 12px;   /* 원형: 999px → 사각형 느낌 */
+      object-fit: cover;
+      border: 1px solid #e7e7e7;
+      background: #fff;
+      display: block;
+    }
+    @media (max-width: 900px) {
+      .avatar { width: 76px; height: 76px; }
+    }
+
+    .hero { padding: 34px 0 10px; }
+    h1 { font-size: 42px; margin: 0 0 10px; letter-spacing: -0.02em; }
+    .tag { font-size: 18px; margin: 0 0 6px; opacity: 0.9; }
+    .sub { font-size: 15px; margin: 0; opacity: 0.75; max-width: 72ch; white-space: pre-line; }
+
+    .btns { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 16px; }
+    .btns.small { margin-top: 10px; }
+    .btn { border: 1px solid #ddd; padding: 10px 12px; border-radius: 10px; text-decoration: none; font-size: 14px; }
+    .btn.primary { background: #111; color: #fff; border-color: #111; }
+
+    .sec { padding: 18px 0; }
+    .sec h2 { font-size: 18px; margin: 0 0 10px; }
+    .secHead { display:flex; justify-content: space-between; align-items:center; gap: 10px; }
+    .smallLink { font-size: 13px; opacity: 0.8; text-decoration: none; }
+    .smallLink:hover { text-decoration: underline; }
+
+    .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+    .card { border: 1px solid #e7e7e7; border-radius: 14px; padding: 14px; background: #fff; }
+    .cardTop { display:flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+    .card h3 { margin: 0; font-size: 15px; }
+    .muted { opacity: 0.75; font-size: 13px; margin: 6px 0; }
+
+    .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+    .pill { font-size: 12px; border: 1px solid #eee; padding: 4px 8px; border-radius: 999px; opacity: 0.85; }
+
+    .outcome {
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .exp {
+      border: 1px solid #e7e7e7;
+      border-radius: 14px;
+      padding: 14px;
+      background: #fff;
+    }
+
+    .expTop {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .expList {
+      margin: 10px 0 0;
+      padding-left: 18px;
+    }
+
+    .expList li {
+      margin: 4px 0;
+    }
+
+    @media (max-width: 900px) {
+      .grid { grid-template-columns: 1fr; }
+      h1 { font-size: 34px; }
+    }
+  </style>
 </Layout>
