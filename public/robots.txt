@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://gibeom-kim-02.github.io/sitemap-index.xml
