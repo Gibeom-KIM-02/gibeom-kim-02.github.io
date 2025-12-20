@@ -18,7 +18,16 @@ const featured = projects.slice(0, 3);
 >
   <section class="hero">
     <div class="heroRow">
-      <img class="avatar" src="/profile.jpg" alt="Gibeom Kim" />
+      <!-- ✅ 클릭 확대용: id 추가 + 버튼처럼 보이게 -->
+      <a class="avatarLink" href="/profile.jpg" target="_blank" rel="noreferrer">
+        <img
+          class="avatar"
+          src="/profile.jpg"
+          alt="Gibeom Kim"
+          loading="lazy"
+        />
+      </a>
+
       <div>
         <h1>{name}</h1>
         <p class="tag">{tagline}</p>
@@ -31,6 +40,12 @@ const featured = projects.slice(0, 3);
       <a class="btn" href="/cv.pdf" target="_blank" rel="noreferrer">Download CV</a>
     </div>
   </section>
+
+  <!-- ✅ 프로필 이미지 확대 모달 -->
+  <dialog id="profileModal" class="imgModal" aria-label="Profile image modal">
+    <button class="closeBtn" type="button" aria-label="Close image">×</button>
+    <img src="/profile.jpg" alt="Gibeom Kim (zoomed)" loading="lazy" />
+  </dialog>
 
   <section class="sec">
     <h2>About</h2>
@@ -45,7 +60,7 @@ const featured = projects.slice(0, 3);
     <h2>Experience</h2>
     <div class="exp">
       <div class="expTop">
-        <b>Undergraduate Research Intern</b>
+        <b>Undergraduate Research Intern at THEMMES Group</b>
         <span class="muted">
           UNIST · Advisor: Prof. Seung-Jae Shin · Jan 2025 – Present
         </span>
@@ -103,9 +118,7 @@ const featured = projects.slice(0, 3);
           </div>
 
           <div class="btns small">
-            {p.links.page && (
-              <a class="btn" href={p.links.page}>Details</a>
-            )}
+            {p.links.page && <a class="btn" href={p.links.page}>Details</a>}
             {p.links.github && (
               <a class="btn" href={p.links.github} target="_blank" rel="noreferrer">GitHub</a>
             )}
@@ -127,19 +140,86 @@ const featured = projects.slice(0, 3);
     </p>
   </section>
 
+  <!-- ✅ 클릭 확대 동작 -->
+  <script is:inline>
+    const img = document.getElementById("profileImg");
+    const modal = document.getElementById("profileModal");
+    const closeBtn = modal?.querySelector(".closeBtn");
+
+    function openModal() {
+      if (!modal) return;
+      // dialog 미지원 브라우저면 새 탭으로
+      if (typeof modal.showModal !== "function") {
+        window.open("/profile.jpg", "_blank");
+        return;
+      }
+      modal.showModal();
+    }
+
+    function closeModal() {
+      if (!modal) return;
+      modal.close();
+    }
+
+    img?.addEventListener("click", openModal);
+    closeBtn?.addEventListener("click", closeModal);
+
+    // 배경 클릭하면 닫기 (img 제외)
+    modal?.addEventListener("click", (e) => {
+      if (e.target === modal) closeModal();
+    });
+  </script>
+
   <style>
     .heroRow { display: flex; gap: 14px; align-items: center; }
+
+    .avatarLink { display: inline-block; }
+
     .avatar{
-      width: 110px;
-      height: 110px;
-      border-radius: 12px;   /* 원형: 999px → 사각형 느낌 */
+      width: 130px;
+      height: 160px;
+      border-radius: 12px;
       object-fit: cover;
       border: 1px solid #e7e7e7;
       background: #fff;
       display: block;
+      cursor: pointer;
     }
+
     @media (max-width: 900px) {
-      .avatar { width: 76px; height: 76px; }
+      .avatar { width: 64px; height: 64px; }
+    }
+
+    /* ✅ dialog 모달 */
+    .imgModal{
+      border: none;
+      padding: 0;
+      border-radius: 14px;
+      max-width: min(900px, 92vw);
+      width: 92vw;
+      overflow: hidden;
+    }
+    .imgModal::backdrop{
+      background: rgba(0, 0, 0, 0.55);
+    }
+    .imgModal img{
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+    .closeBtn{
+      position: absolute;
+      top: 10px;
+      right: 12px;
+      width: 34px;
+      height: 34px;
+      border: 1px solid rgba(255,255,255,0.25);
+      background: rgba(0,0,0,0.55);
+      color: #fff;
+      border-radius: 999px;
+      cursor: pointer;
+      font-size: 20px;
+      line-height: 32px;
     }
 
     .hero { padding: 34px 0 10px; }
