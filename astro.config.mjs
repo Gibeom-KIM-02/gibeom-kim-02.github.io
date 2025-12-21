@@ -4,7 +4,6 @@ import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
   site: 'https://gibeom-kim-02.github.io',
-  base: '/regular-radiation',
   trailingSlash: 'always',
   integrations: [sitemap()],
 });
