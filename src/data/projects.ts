@@ -16,6 +16,7 @@ export type Project = {
 
 export const projects: Project[] = [
   {
+    slug: "lammps-input-generator",
     title: "LAMMPS Input Generator",
     period: "2025",
     oneLiner: "A configurable generator to build reproducible LAMMPS inputs for simulation workflows.",
@@ -29,6 +30,7 @@ export const projects: Project[] = [
     },
   },
   {
+    slug: "bandgap-cgcnn",
     title: "Predicting Bandgap of Hexanary Oxides (CGCNN)",
     period: "2025",
     oneLiner:
@@ -43,6 +45,7 @@ export const projects: Project[] = [
     },
   },
   {
+    slug: "hf",
     title: "Hartree–Fock in Python (Modular Implementation)",
     period: "2025",
     oneLiner: "A modular Hartree–Fock implementation in Python focused on clarity, validation, and extensibility.",

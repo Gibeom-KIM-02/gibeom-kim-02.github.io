@@ -1,18 +1,21 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 
-const title = "Hartree–Fock in Python (Midterm Replacement Project)";
+const title = "Hartree-Fock in Python (Modular Implementation)";
 const period = "2025";
-const tags = ["Quantum Chemistry", "Hartree–Fock", "Python"];
+const tags = ["Quantum Chemistry", "Hartree-Fock", "Python"];
 const repo = "https://github.com/Gibeom-KIM-02/hf";
 
-// Optional: if you add an image, place it at public/projects/hf.png
-// If you leave this as an empty string, the image section will not show.
-const heroImage = "/projects/hf.png";
+const RAW_BASE = import.meta.env.BASE_URL ?? "/";
+const BASE = RAW_BASE.endsWith("/") ? RAW_BASE : `${RAW_BASE}/`;
+const withBase = (p) => `${BASE}${String(p).replace(/^\/+/, "")}`;
+
+// Put the file here: public/projects/hf.png
+const heroImage = withBase("projects/hf.png");
 ---
 
-<Layout title={`${title} — Gibeom Kim`} description="Midterm replacement project: basic Hartree–Fock workflow in Python.">
-  <a class="back" href="/projects">← Back to Projects</a>
+<Layout title={`${title} - Gibeom Kim`} description="A modular Hartree-Fock implementation in Python focused on clarity and validation.">
+  <a class="back" href={withBase("projects/")}>Back to Projects</a>
 
   <header class="hero">
     <div class="titleRow">
@@ -25,8 +28,8 @@ const heroImage = "/projects/hf.png";
     </div>
 
     <p class="lead">
-      As a midterm replacement assignment, I implemented a basic Hartree–Fock (HF) workflow in Python and
-      validated it by computing the H–H binding energy.
+      I implemented a basic Hartree-Fock workflow in Python and validated it with simple reference checks
+      (e.g., single-atom energy and H2 binding energy).
     </p>
 
     <div class="btns">
@@ -35,12 +38,12 @@ const heroImage = "/projects/hf.png";
   </header>
 
   <section class="sec">
-    <h2>What I Did</h2>
+    <h2>What I did</h2>
     <div class="card">
       <ul class="muted list">
-        <li>Implemented a simple HF pipeline and kept the code readable and modular.</li>
-        <li>Checked intermediate quantities (matrices/energies) to ensure the workflow behaves as expected.</li>
-        <li>Computed the H–H binding energy as a basic validation target.</li>
+        <li>Implemented a modular HF pipeline designed for readability and extensions.</li>
+        <li>Checked intermediate matrices and energy terms for correctness.</li>
+        <li>Validated results using simple systems as sanity checks.</li>
       </ul>
     </div>
   </section>
@@ -49,7 +52,7 @@ const heroImage = "/projects/hf.png";
     <section class="sec">
       <h2>Figure</h2>
       <p class="muted">
-        Optional figure (e.g., energy vs bond distance). Place it at <code>public/projects/hf.png</code>.
+        Place the figure at <code>public/projects/hf.png</code>.
       </p>
       <div class="imgWrap">
         <img src={heroImage} alt="HF project figure" loading="lazy" />
@@ -58,13 +61,13 @@ const heroImage = "/projects/hf.png";
   ) : null}
 
   <section class="sec">
-    <h2>How to Run</h2>
+    <h2>How to run</h2>
     <div class="card">
       <pre><code>git clone {repo}
 cd hf
 python HF_Driver.py</code></pre>
       <p class="muted" style="margin-top:10px;">
-        If your entry file name differs, replace <code>HF_Driver.py</code> with the correct script in the repo.
+        See the repository README for details.
       </p>
     </div>
   </section>

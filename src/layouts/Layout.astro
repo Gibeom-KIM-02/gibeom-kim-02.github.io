@@ -2,32 +2,42 @@
 type Props = {
   title?: string;
   description?: string;
-  ogImage?: string;   // e.g. "/og.png" or "/profile.jpg"
+  ogImage?: string; // e.g. "/og.png" or "/profile.jpg"
   noindex?: boolean;
 };
 
 const {
   title = "Gibeom Kim",
   description = "Personal website of Gibeom Kim.",
-  ogImage = "/og.png",          // ✅ 기본 OG 이미지는 PNG로 고정
+  ogImage = "/og.png",
   noindex = false,
 } = Astro.props;
 
-const site = Astro.site; // astro.config.mjs의 site 값 사용
+const site = Astro.site;
 
-// canonical은 "사이트의 실제 주소" 기준으로 만드는 게 SEO에 유리
+// Base-path helper (GitHub Pages repo site support)
+const RAW_BASE = import.meta.env.BASE_URL ?? "/";
+const BASE = RAW_BASE.endsWith("/") ? RAW_BASE : `${RAW_BASE}/`;
+const withBase = (p: string) => `${BASE}${String(p).replace(/^\/+/, "")}`;
+
 const canonical = site ? new URL(Astro.url.pathname, site).toString() : undefined;
 
-// og:image는 가급적 absolute URL이 안정적
-const ogAbs = site ? new URL(ogImage, site).toString() : ogImage;
+const isAbsoluteUrl = (u: string) => /^https?:\/\//i.test(u);
 
-// JSON-LD (Person) - 최소 구성
+// Ensure OG image points to the correct base path
+const ogPath = isAbsoluteUrl(ogImage) ? ogImage : withBase(ogImage);
+const ogAbs = site ? new URL(ogPath, site).toString() : ogPath;
+
+// JSON-LD (Person)
 const personJsonLd = {
   "@context": "https://schema.org",
   "@type": "Person",
   name: "Gibeom Kim",
-  url: site ? new URL("/", site).toString() : undefined,
-  sameAs: ["https://github.com/Gibeom-KIM-02"],
+  url: site ? new URL(BASE, site).toString() : undefined,
+  sameAs: [
+    "https://github.com/Gibeom-KIM-02",
+    "https://www.linkedin.com/in/gibeom-kim-0bbb68370/",
+  ],
   affiliation: {
     "@type": "CollegeOrUniversity",
     name: "UNIST",
@@ -45,19 +55,16 @@ const personJsonLd = {
     <title>{title}</title>
     <meta name="description" content={description} />
 
-    <!-- ✅ (선택) 브라우저 기본 보안/미관 -->
     <meta name="referrer" content="strict-origin-when-cross-origin" />
     <meta name="theme-color" content="#0b1020" />
 
-    <!-- ✅ Favicon (PNG only) -->
-    <!-- 같은 PNG 한 장을 여러 sizes로 선언해도 브라우저가 알아서 downscale 함 -->
-    <link rel="icon" href="/favicon.png" type="image/png" sizes="32x32" />
-    <link rel="icon" href="/favicon.png" type="image/png" sizes="16x16" />
-    <link rel="apple-touch-icon" href="/favicon.png" />
+    <!-- Favicon -->
+    <link rel="icon" href={withBase("favicon.png")} type="image/png" sizes="32x32" />
+    <link rel="icon" href={withBase("favicon.png")} type="image/png" sizes="16x16" />
+    <link rel="apple-touch-icon" href={withBase("favicon.png")} />
 
     {canonical && <link rel="canonical" href={canonical} />}
 
-    <!-- robots meta는 옵션: noindex일 때만 명확히 막아주기 -->
     {noindex ? (
       <meta name="robots" content="noindex,nofollow" />
     ) : (
@@ -72,7 +79,7 @@ const personJsonLd = {
     <meta property="og:locale" content="en_US" />
     {canonical && <meta property="og:url" content={canonical} />}
     <meta property="og:image" content={ogAbs} />
-    <meta property="og:image:alt" content="Gibeom Kim — personal website preview" />
+    <meta property="og:image:alt" content="Gibeom Kim personal website preview" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
 
@@ -81,7 +88,7 @@ const personJsonLd = {
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogAbs} />
-    <meta name="twitter:image:alt" content="Gibeom Kim — personal website preview" />
+    <meta name="twitter:image:alt" content="Gibeom Kim personal website preview" />
 
     <!-- Structured Data -->
     <script type="application/ld+json">
@@ -97,7 +104,6 @@ const personJsonLd = {
 </html>
 
 <style>
-  /* 기본 리셋 + 가독성 */
   html, body { margin: 0; width: 100%; height: 100%; }
   * { box-sizing: border-box; }
 
@@ -109,8 +115,8 @@ const personJsonLd = {
   }
 
   .container{
-    max-width: 1110px;     /* 페이지 최대 폭 */
-    margin: 0 auto;       /* 가운데 정렬 */
-    padding: 36px 22px;   /* 상하 36px, 좌우 22px 여백 */
+    max-width: 1110px;
+    margin: 0 auto;
+    padding: 36px 22px;
   }
 </style>

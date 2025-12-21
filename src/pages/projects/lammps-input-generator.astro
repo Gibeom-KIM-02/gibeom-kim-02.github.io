@@ -6,12 +6,16 @@ const period = "2025";
 const tags = ["LAMMPS", "MD", "Automation", "Reproducibility"];
 const repo = "https://github.com/Gibeom-KIM-02/lammps_input_generator";
 
-// Optional image: public/projects/lammps-input-generator.png
-const heroImage = "/projects/lammps-input-generator.png";
+const RAW_BASE = import.meta.env.BASE_URL ?? "/";
+const BASE = RAW_BASE.endsWith("/") ? RAW_BASE : `${RAW_BASE}/`;
+const withBase = (p) => `${BASE}${String(p).replace(/^\/+/, "")}`;
+
+// Put the file here: public/projects/lammps-input-generator.png
+const heroImage = withBase("projects/lammps-input-generator.png");
 ---
 
-<Layout title={`${title} — Gibeom Kim`} description="A configurable generator to build reproducible LAMMPS inputs for simulation workflows.">
-  <a class="back" href="/projects">← Back to Projects</a>
+<Layout title={`${title} - Gibeom Kim`} description="A configurable generator to build reproducible LAMMPS inputs for simulation workflows.">
+  <a class="back" href={withBase("projects/")}>Back to Projects</a>
 
   <header class="hero">
     <div class="titleRow">
@@ -58,7 +62,7 @@ const heroImage = "/projects/lammps-input-generator.png";
     <section class="sec">
       <h2>Figure</h2>
       <p class="muted">
-        Optional screenshot/diagram. Place it at <code>public/projects/lammps-input-generator.png</code>.
+        Place the figure at <code>public/projects/lammps-input-generator.png</code>.
       </p>
       <div class="imgWrap">
         <img src={heroImage} alt="LAMMPS Input Generator figure" loading="lazy" />
@@ -67,12 +71,12 @@ const heroImage = "/projects/lammps-input-generator.png";
   ) : null}
 
   <section class="sec">
-    <h2>How to use</h2>
+    <h2>How to run</h2>
     <div class="card">
       <pre><code>git clone {repo}
 cd lammps_input_generator</code></pre>
       <p class="muted" style="margin-top:10px;">
-        See the repository README for the exact CLI / config format and examples.
+        See the repository README for the exact CLI and config format.
       </p>
     </div>
   </section>

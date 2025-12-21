@@ -7,41 +7,48 @@ const name = "Gibeom Kim";
 const tagline =
   "Undergraduate researcher building reproducible simulation workflows for electrochemical interfaces and materials modeling.";
 
-const subtagline = `My goal is to become a researcher who learns steadily, works honestly, and contributes meaningfully.`;
+const subtagline =
+  "My goal is to become a researcher who learns steadily, works honestly, and contributes meaningfully.";
 
 const featured = projects.slice(0, 3);
 
-/** ✅ Tools you’ve used (edit anytime) */
 const toolGroups = [
-  {
-    title: "Molecular Dynamics",
-    items: ["LAMMPS"],
-  },
-  {
-    title: "Quantum Chemistry / DFT",
-    items: ["Gaussian", "NWChem", "Quantum Espresso"],
-  },
-  {
-    title: "Workflow & Analysis",
-    items: ["Python", "ASE", "MDAnalysis", "Packmol", "Git"],
-  },
+  { title: "Molecular Dynamics", items: ["LAMMPS"] },
+  { title: "Quantum Chemistry / DFT", items: ["Gaussian", "NWChem", "Quantum Espresso"] },
+  { title: "Workflow & Analysis", items: ["Python", "ASE", "MDAnalysis", "Packmol", "Git"] },
 ];
 
-/** ✅ Publications placeholder (add entries later) */
-const publications = []; // later: push objects like { title, venue, year, authors, links }
+const publications: any[] = [];
+
+// Base-path helper (GitHub Pages repo site support)
+const RAW_BASE = import.meta.env.BASE_URL ?? "/";
+const BASE = RAW_BASE.endsWith("/") ? RAW_BASE : `${RAW_BASE}/`;
+const withBase = (p: string) => `${BASE}${String(p).replace(/^\/+/, "")}`;
+
+// If p.slug is missing, fall back to known pages (prevents /projects/undefined/)
+function detailsPath(p: any): string {
+  if (p?.slug) return `projects/${p.slug}/`;
+
+  const t = String(p?.title ?? "").toLowerCase();
+  if (t.includes("lammps input generator")) return "projects/lammps-input-generator/";
+  if (t.includes("bandgap") && t.includes("cgcnn")) return "projects/bandgap-cgcnn/";
+  if (t.includes("hartree") || t.includes("fock")) return "projects/hf/";
+
+  return "projects/";
+}
 ---
 
 <Layout
-  title={`${name} — Home`}
+  title={`${name} - Home`}
   description="Personal website of Gibeom Kim. Research interests and featured projects."
 >
   <section class="hero">
     <div class="heroRow">
-      <a class="avatarLink" href="/profile.jpg" target="_blank" rel="noreferrer">
-        <img class="avatar" src="/profile.jpg" alt="Gibeom Kim" loading="lazy" />
+      <a class="avatarLink" href={withBase("profile.jpg")} target="_blank" rel="noreferrer">
+        <img class="avatar" src={withBase("profile.jpg")} alt="Gibeom Kim" loading="lazy" />
       </a>
 
-      <div>
+      <div class="heroText">
         <h1>{name}</h1>
         <p class="tag">{tagline}</p>
         <p class="sub">{subtagline}</p>
@@ -49,7 +56,7 @@ const publications = []; // later: push objects like { title, venue, year, autho
     </div>
 
     <div class="btns">
-      <a class="btn primary" href="/projects">
+      <a class="btn primary" href={withBase("projects/")}>
         <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
           <path
             d="M4 7.5h6.7l1.8 2H20a2 2 0 0 1 2 2v7.5a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9.5a2 2 0 0 1 2-2Z"
@@ -68,7 +75,7 @@ const publications = []; // later: push objects like { title, venue, year, autho
         <span>View projects</span>
       </a>
 
-      <a class="btn" href="/cv.pdf" target="_blank" rel="noreferrer">
+      <a class="btn" href={withBase("cv.pdf")} target="_blank" rel="noreferrer">
         <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
           <path
             d="M14 2H7a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8l-5-6Z"
@@ -89,12 +96,7 @@ const publications = []; // later: push objects like { title, venue, year, autho
         <span>Download CV</span>
       </a>
 
-      <a
-        class="btn"
-        href="https://www.linkedin.com/in/gibeom-kim-0bbb68370/"
-        target="_blank"
-        rel="noreferrer"
-      >
+      <a class="btn" href="https://www.linkedin.com/in/gibeom-kim-0bbb68370/" target="_blank" rel="noreferrer">
         <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
           <path
             d="M6.94 6.5A1.94 1.94 0 1 1 3.06 6.5a1.94 1.94 0 0 1 3.88 0Z"
@@ -109,7 +111,7 @@ const publications = []; // later: push objects like { title, venue, year, autho
         <span>LinkedIn</span>
       </a>
 
-      <a class="btn" href="/google-scholar">
+      <a class="btn" href={withBase("google-scholar/")}>
         <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
           <path
             d="M12 3l10 5-10 5L2 8l10-5Z"
@@ -133,9 +135,9 @@ const publications = []; // later: push objects like { title, venue, year, autho
   <section class="sec">
     <h2>About</h2>
     <p class="muted">
-      I am an undergraduate student at UNIST, majoring in Energy and Chemical Engineering.
-      I enjoy building reproducible computational workflows&mdash;from simulation setup to analysis-ready results.
-      My current interests include electrochemical interfaces, molecular simulations, and materials machine learning.
+      I am an undergraduate student at UNIST, majoring in Energy and Chemical Engineering. I enjoy building reproducible
+      computational workflows - from simulation setup to analysis-ready results. My current interests include
+      electrochemical interfaces, molecular simulations, and materials machine learning.
     </p>
   </section>
 
@@ -144,26 +146,24 @@ const publications = []; // later: push objects like { title, venue, year, autho
     <div class="exp">
       <div class="expTop">
         <b>Undergraduate Research Intern at THEMMES Group</b>
-        <span class="muted">
-          UNIST &middot; Advisor: Prof. Seung-Jae Shin &middot; Jan 2025 &ndash; Present
-        </span>
+        <span class="muted">UNIST | Advisor: Prof. Seung-Jae Shin | Jan 2025 - Present</span>
       </div>
 
       <ul class="expList muted">
         <li>
-          Built an automated MD workflow (LAMMPS + ligpargen/OPLS) covering setup &rarr; runs &rarr; post-processing,
+          Built an automated MD workflow (LAMMPS + ligpargen/OPLS) covering setup -&gt; runs -&gt; post-processing,
           including MDAnalysis-based RDF/CN calculation with trajectory visualization.
         </li>
         <li>
-          Performed constant-potential MD (CPM) studies of electrode&ndash;electrolyte interfaces; ongoing collaboration
-          with Prof. Hyun-Kon Song&apos;s group at UNIST.
+          Performed constant-potential MD (CPM) studies of electrode-electrolyte interfaces; ongoing collaboration with
+          Prof. Hyun-Kon Song's group at UNIST.
         </li>
         <li>
           Ran baseline DFT calculations (binding energies, solvation effects) and used DFT-based MLFF (MACE-OFF) for rapid
           structure optimization; validated energies via LAMMPS single-point evaluations.
         </li>
         <li>
-          Contributed to the &ldquo;Computational Materials Science&rdquo; course by helping develop Hands-on Session #12 and
+          Contributed to the "Computational Materials Science" course by helping develop Hands-on Session #12 and
           authoring supporting documentation/tutorial materials.
         </li>
       </ul>
@@ -173,42 +173,36 @@ const publications = []; // later: push objects like { title, venue, year, autho
   <section class="sec">
     <h2>Research Interests</h2>
     <p class="muted">
-      Electrochemical interfaces &middot; molecular simulations (MD) &middot; materials machine learning
+      Electrochemical interfaces, molecular simulations (MD), materials machine learning
       <br />
-      Reproducible workflows &middot; automation &middot; validation and analysis
+      Reproducible workflows, automation, validation and analysis
     </p>
   </section>
 
-  <!-- ✅ NEW: Tools -->
   <section class="sec">
     <h2>Tools &amp; Software</h2>
-    <p class="muted" style="margin-top:-2px;">
-      A short snapshot of tools I have used in research and coursework.
-    </p>
+    <p class="muted" style="margin-top:-2px;">A short snapshot of tools I have used in research.</p>
 
     <div class="toolGrid">
       {toolGroups.map((g) => (
         <div class="toolCard">
           <div class="toolTitle">{g.title}</div>
-          <div class="tags">
-            {g.items.map((t) => <span class="pill">{t}</span>)}
-          </div>
+          <div class="tags">{g.items.map((t) => <span class="pill">{t}</span>)}</div>
         </div>
       ))}
     </div>
   </section>
 
-  <!-- ✅ NEW: Publications -->
   <section class="sec">
     <div class="secHead">
       <h2>Publications</h2>
-      <a class="smallLink" href="/publications">See all &rarr;</a>
+      <a class="smallLink" href={withBase("publications/")}>See all -&gt;</a>
     </div>
 
     {publications.length === 0 ? (
       <div class="emptyCard">
         <p class="muted" style="margin:0;">
-          Coming soon. I’ll list peer-reviewed papers and preprints here once they are published.
+          Coming soon. I'll list peer-reviewed papers and preprints here once they are published.
         </p>
       </div>
     ) : (
@@ -220,7 +214,7 @@ const publications = []; // later: push objects like { title, venue, year, autho
               <span class="muted">{p.year}</span>
             </div>
             <p class="muted" style="margin:6px 0 0;">
-              {p.authors} &mdash; {p.venue}
+              {p.authors} - {p.venue}
             </p>
           </article>
         ))}
@@ -231,7 +225,7 @@ const publications = []; // later: push objects like { title, venue, year, autho
   <section class="sec">
     <div class="secHead">
       <h2>Featured Projects</h2>
-      <a class="smallLink" href="/projects">See all &rarr;</a>
+      <a class="smallLink" href={withBase("projects/")}>See all -&gt;</a>
     </div>
 
     <div class="grid">
@@ -245,19 +239,18 @@ const publications = []; // later: push objects like { title, venue, year, autho
           <p class="muted">{p.oneLiner}</p>
           <p class="muted outcome"><b>Outcome:</b> {p.outcomeShort ?? p.outcome}</p>
 
-          <div class="tags">
-            {p.tags.slice(0, 4).map((t) => <span class="pill">{t}</span>)}
-          </div>
+          <div class="tags">{p.tags.slice(0, 4).map((t) => <span class="pill">{t}</span>)}</div>
 
           <div class="btns small">
-            <a class="btn" href={`/projects/${p.slug}`}>Details</a>
-            {p.links.github && (
+            <a class="btn" href={withBase(detailsPath(p))}>Details</a>
+
+            {p.links?.github && (
               <a class="btn" href={p.links.github} target="_blank" rel="noreferrer">GitHub</a>
             )}
-            {p.links.paper && (
+            {p.links?.paper && (
               <a class="btn" href={p.links.paper} target="_blank" rel="noreferrer">Paper</a>
             )}
-            {p.links.pdf && (
+            {p.links?.pdf && (
               <a class="btn" href={p.links.pdf} target="_blank" rel="noreferrer">PDF</a>
             )}
           </div>
@@ -278,13 +271,7 @@ const publications = []; // later: push objects like { title, venue, year, autho
         <span>Email</span>
       </a>
 
-      <a
-        class="iconBtn"
-        href="https://github.com/Gibeom-KIM-02"
-        target="_blank"
-        rel="noreferrer"
-        aria-label="GitHub"
-      >
+      <a class="iconBtn" href="https://github.com/Gibeom-KIM-02" target="_blank" rel="noreferrer" aria-label="GitHub">
         <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
           <path
             d="M12 2c5.52 0 10 4.58 10 10.24 0 4.52-2.87 8.35-6.84 9.7-.5.1-.68-.22-.68-.48v-1.7c0-.58-.2-.95-.42-1.15 1.38-.16 2.84-.7 2.84-3.2 0-.7-.24-1.28-.64-1.73.06-.16.28-.82-.06-1.7 0 0-.52-.17-1.7.66-.5-.14-1.04-.2-1.58-.2-.54 0-1.08.06-1.58.2-1.18-.83-1.7-.66-1.7-.66-.34.88-.12 1.54-.06 1.7-.4.45-.64 1.03-.64 1.73 0 2.5 1.45 3.04 2.83 3.2-.18.16-.34.44-.4.84-.36.17-1.3.48-1.86-.57 0 0-.34-.64-.98-.7 0 0-.62-.01-.04.39 0 0 .42.2.72.95 0 0 .37 1.16 2.13.78v1.24c0 .26-.18.58-.68.48C4.87 20.59 2 16.76 2 12.24 2 6.58 6.48 2 12 2Z"
@@ -294,13 +281,7 @@ const publications = []; // later: push objects like { title, venue, year, autho
         <span>GitHub</span>
       </a>
 
-      <a
-        class="iconBtn"
-        href="https://www.linkedin.com/in/gibeom-kim-0bbb68370/"
-        target="_blank"
-        rel="noreferrer"
-        aria-label="LinkedIn"
-      >
+      <a class="iconBtn" href="https://www.linkedin.com/in/gibeom-kim-0bbb68370/" target="_blank" rel="noreferrer" aria-label="LinkedIn">
         <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
           <path
             d="M6.94 6.5A1.94 1.94 0 1 1 3.06 6.5a1.94 1.94 0 0 1 3.88 0Z"
@@ -315,7 +296,7 @@ const publications = []; // later: push objects like { title, venue, year, autho
         <span>LinkedIn</span>
       </a>
 
-      <a class="iconBtn" href="/google-scholar" aria-label="Google Scholar (Coming soon)">
+      <a class="iconBtn" href={withBase("google-scholar/")} aria-label="Google Scholar (soon)">
         <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
           <path d="M12 3l10 5-10 5L2 8l10-5Z" stroke="currentColor" stroke-width="1.8" />
           <path d="M6 10v5c0 2 3 4 6 4s6-2 6-4v-5" stroke="currentColor" stroke-width="1.8" />
@@ -326,14 +307,22 @@ const publications = []; // later: push objects like { title, venue, year, autho
 
     <p class="muted contactMeta">
       <a href="mailto:kkb1198@unist.ac.kr">kkb1198@unist.ac.kr</a>
-      &middot;
+      <span> | </span>
       <a href="https://github.com/Gibeom-KIM-02" target="_blank" rel="noreferrer">github.com/Gibeom-KIM-02</a>
     </p>
   </section>
 
   <style>
-    .heroRow { display: flex; gap: 14px; align-items: center; }
-    .avatarLink{ display:inline-block; border-radius: 12px; overflow: hidden; }
+    .heroRow { display: flex; gap: 22px; align-items: center; }
+    .heroText { min-width: 0; }
+
+    .avatarLink{
+      display:inline-block;
+      border-radius: 12px;
+      overflow: visible;
+      flex: 0 0 auto;
+    }
+
     .avatar{
       width: 130px;
       height: 160px;
@@ -400,7 +389,6 @@ const publications = []; // later: push objects like { title, venue, year, autho
       h1 { font-size: 34px; }
     }
 
-    /* Shared icon size */
     .icon{
       width: 18px;
       height: 18px;
@@ -408,7 +396,6 @@ const publications = []; // later: push objects like { title, venue, year, autho
       flex: 0 0 auto;
     }
 
-    /* ✅ Tools */
     .toolGrid{
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -433,7 +420,6 @@ const publications = []; // later: push objects like { title, venue, year, autho
       .toolGrid{ grid-template-columns: 1fr; }
     }
 
-    /* ✅ Publications */
     .emptyCard{
       border: 1px solid rgba(0,0,0,0.06);
       border-radius: 14px;
@@ -450,7 +436,6 @@ const publications = []; // later: push objects like { title, venue, year, autho
     }
     .pubTop{ display:flex; justify-content: space-between; gap: 10px; align-items: baseline; flex-wrap: wrap; }
 
-    /* Contact */
     .contactIcons{
       display: flex;
       gap: 10px;

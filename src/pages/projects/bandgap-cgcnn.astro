@@ -6,12 +6,16 @@ const period = "2025";
 const tags = ["Materials ML", "CGCNN", "Bandgap", "Python"];
 const repo = "https://github.com/Gibeom-KIM-02/Predicting-bandgap-of-Hexanary-oxide";
 
-// Optional image: public/projects/bandgap-cgcnn.png
-const heroImage = "/projects/bandgap-cgcnn.jpg";
+const RAW_BASE = import.meta.env.BASE_URL ?? "/";
+const BASE = RAW_BASE.endsWith("/") ? RAW_BASE : `${RAW_BASE}/`;
+const withBase = (p) => `${BASE}${String(p).replace(/^\/+/, "")}`;
+
+// Put the file here: public/projects/bandgap-cgcnn.png
+const heroImage = withBase("projects/bandgap-cgcnn.png");
 ---
 
-<Layout title={`${title} — Gibeom Kim`} description="Trained and evaluated a CGCNN-based model to predict bandgaps of hexanary oxides.">
-  <a class="back" href="/projects">← Back to Projects</a>
+<Layout title={`${title} - Gibeom Kim`} description="Trained and evaluated a CGCNN-based model to predict bandgaps of hexanary oxides.">
+  <a class="back" href={withBase("projects/")}>Back to Projects</a>
 
   <header class="hero">
     <div class="titleRow">
@@ -25,7 +29,7 @@ const heroImage = "/projects/bandgap-cgcnn.jpg";
 
     <p class="lead">
       A materials ML project where I trained and evaluated a CGCNN-based model to predict bandgaps of hexanary oxides.
-      The focus was building a clean workflow from structure data → model training → evaluation.
+      The focus was building a clean workflow from structure data to model training and evaluation.
     </p>
 
     <div class="btns">
@@ -40,6 +44,7 @@ const heroImage = "/projects/bandgap-cgcnn.jpg";
         <li>Prepared structure datasets and organized train/validation/test splits.</li>
         <li>Implemented a reproducible training/evaluation pipeline for CGCNN experiments.</li>
         <li>Tracked results to compare model performance across settings.</li>
+        <li>Especially for Low-Bandgap region, I have enhanced its prediction through importing weight function on its code skeleton.</li>
       </ul>
     </div>
   </section>
@@ -58,7 +63,7 @@ const heroImage = "/projects/bandgap-cgcnn.jpg";
     <section class="sec">
       <h2>Figure</h2>
       <p class="muted">
-        Optional figure (e.g., parity plot of predicted vs. target bandgaps). Place it at <code>public/projects/bandgap-cgcnn.png</code>.
+        Place the figure at <code>public/projects/bandgap-cgcnn.png</code>.
       </p>
       <div class="imgWrap">
         <img src={heroImage} alt="Bandgap CGCNN figure" loading="lazy" />
