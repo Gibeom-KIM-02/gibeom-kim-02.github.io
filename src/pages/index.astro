@@ -10,6 +10,25 @@ const tagline =
 const subtagline = `My goal is to become a researcher who learns steadily, works honestly, and contributes meaningfully.`;
 
 const featured = projects.slice(0, 3);
+
+/** ✅ Tools you’ve used (edit anytime) */
+const toolGroups = [
+  {
+    title: "Molecular Dynamics",
+    items: ["LAMMPS"],
+  },
+  {
+    title: "Quantum Chemistry / DFT",
+    items: ["Gaussian", "NWChem", "Quantum Espresso"],
+  },
+  {
+    title: "Workflow & Analysis",
+    items: ["Python", "ASE", "MDAnalysis", "Packmol", "Git"],
+  },
+];
+
+/** ✅ Publications placeholder (add entries later) */
+const publications = []; // later: push objects like { title, venue, year, authors, links }
 ---
 
 <Layout
@@ -18,14 +37,8 @@ const featured = projects.slice(0, 3);
 >
   <section class="hero">
     <div class="heroRow">
-      <!-- ✅ 클릭 확대용: id 추가 + 버튼처럼 보이게 -->
       <a class="avatarLink" href="/profile.jpg" target="_blank" rel="noreferrer">
-        <img
-          class="avatar"
-          src="/profile.jpg"
-          alt="Gibeom Kim"
-          loading="lazy"
-        />
+        <img class="avatar" src="/profile.jpg" alt="Gibeom Kim" loading="lazy" />
       </a>
 
       <div>
@@ -36,22 +49,92 @@ const featured = projects.slice(0, 3);
     </div>
 
     <div class="btns">
-      <a class="btn primary" href="/projects">View projects</a>
-      <a class="btn" href="/cv.pdf" target="_blank" rel="noreferrer">Download CV</a>
+      <a class="btn primary" href="/projects">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path
+            d="M4 7.5h6.7l1.8 2H20a2 2 0 0 1 2 2v7.5a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9.5a2 2 0 0 1 2-2Z"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linejoin="round"
+          />
+          <path
+            d="M4 7.5V6a2 2 0 0 1 2-2h4.5l1.4 1.5"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+        <span>View projects</span>
+      </a>
+
+      <a class="btn" href="/cv.pdf" target="_blank" rel="noreferrer">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path
+            d="M14 2H7a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8l-5-6Z"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linejoin="round"
+          />
+          <path d="M14 2v6h6" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" />
+          <path d="M12 11v6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+          <path
+            d="M9.5 14.5 12 17l2.5-2.5"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+        <span>Download CV</span>
+      </a>
+
+      <a
+        class="btn"
+        href="https://www.linkedin.com/in/gibeom-kim-0bbb68370/"
+        target="_blank"
+        rel="noreferrer"
+      >
+        <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path
+            d="M6.94 6.5A1.94 1.94 0 1 1 3.06 6.5a1.94 1.94 0 0 1 3.88 0Z"
+            fill="currentColor"
+          />
+          <path d="M3.5 9h3v11h-3z" fill="currentColor" />
+          <path
+            d="M10 9h2.9v1.5h.04c.4-.76 1.38-1.56 2.84-1.56 3.04 0 3.6 2.06 3.6 4.74V20h-3v-5.5c0-1.32-.02-3.02-1.84-3.02-1.84 0-2.12 1.46-2.12 2.92V20h-3z"
+            fill="currentColor"
+          />
+        </svg>
+        <span>LinkedIn</span>
+      </a>
+
+      <a class="btn" href="/google-scholar">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path
+            d="M12 3l10 5-10 5L2 8l10-5Z"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linejoin="round"
+          />
+          <path
+            d="M6 10v5c0 2 3 4 6 4s6-2 6-4v-5"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+        <span>Google Scholar (soon)</span>
+      </a>
     </div>
   </section>
-
-  <!-- ✅ 프로필 이미지 확대 모달 -->
-  <dialog id="profileModal" class="imgModal" aria-label="Profile image modal">
-    <button class="closeBtn" type="button" aria-label="Close image">×</button>
-    <img src="/profile.jpg" alt="Gibeom Kim (zoomed)" loading="lazy" />
-  </dialog>
 
   <section class="sec">
     <h2>About</h2>
     <p class="muted">
       I am an undergraduate student at UNIST, majoring in Energy and Chemical Engineering.
-      I enjoy building reproducible computational workflows—from simulation setup to analysis-ready results.
+      I enjoy building reproducible computational workflows&mdash;from simulation setup to analysis-ready results.
       My current interests include electrochemical interfaces, molecular simulations, and materials machine learning.
     </p>
   </section>
@@ -62,25 +145,25 @@ const featured = projects.slice(0, 3);
       <div class="expTop">
         <b>Undergraduate Research Intern at THEMMES Group</b>
         <span class="muted">
-          UNIST · Advisor: Prof. Seung-Jae Shin · Jan 2025 – Present
+          UNIST &middot; Advisor: Prof. Seung-Jae Shin &middot; Jan 2025 &ndash; Present
         </span>
       </div>
 
       <ul class="expList muted">
         <li>
-          Built an automated MD workflow (LAMMPS + ligpargen/OPLS) covering setup → runs → post-processing,
+          Built an automated MD workflow (LAMMPS + ligpargen/OPLS) covering setup &rarr; runs &rarr; post-processing,
           including MDAnalysis-based RDF/CN calculation with trajectory visualization.
         </li>
         <li>
-          Performed constant-potential MD (CPM) studies of electrode–electrolyte interfaces; ongoing collaboration with
-          Prof. Hyun-Kon Song’s group at UNIST.
+          Performed constant-potential MD (CPM) studies of electrode&ndash;electrolyte interfaces; ongoing collaboration
+          with Prof. Hyun-Kon Song&apos;s group at UNIST.
         </li>
         <li>
-          Ran baseline DFT calculations (binding energies, solvation effects) and used DFT-based MLFF (MACE-OFF)
-          for rapid structure optimization; validated energies via LAMMPS single-point evaluations.
+          Ran baseline DFT calculations (binding energies, solvation effects) and used DFT-based MLFF (MACE-OFF) for rapid
+          structure optimization; validated energies via LAMMPS single-point evaluations.
         </li>
         <li>
-          Contributed to the “Computational Materials Science” course by helping develop Hands-on Session #12 and
+          Contributed to the &ldquo;Computational Materials Science&rdquo; course by helping develop Hands-on Session #12 and
           authoring supporting documentation/tutorial materials.
         </li>
       </ul>
@@ -90,16 +173,65 @@ const featured = projects.slice(0, 3);
   <section class="sec">
     <h2>Research Interests</h2>
     <p class="muted">
-      Electrochemical interfaces · molecular simulations (MD) · materials machine learning
+      Electrochemical interfaces &middot; molecular simulations (MD) &middot; materials machine learning
       <br />
-      Reproducible workflows · automation · validation and analysis
+      Reproducible workflows &middot; automation &middot; validation and analysis
     </p>
+  </section>
+
+  <!-- ✅ NEW: Tools -->
+  <section class="sec">
+    <h2>Tools &amp; Software</h2>
+    <p class="muted" style="margin-top:-2px;">
+      A short snapshot of tools I have used in research and coursework.
+    </p>
+
+    <div class="toolGrid">
+      {toolGroups.map((g) => (
+        <div class="toolCard">
+          <div class="toolTitle">{g.title}</div>
+          <div class="tags">
+            {g.items.map((t) => <span class="pill">{t}</span>)}
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- ✅ NEW: Publications -->
+  <section class="sec">
+    <div class="secHead">
+      <h2>Publications</h2>
+      <a class="smallLink" href="/publications">See all &rarr;</a>
+    </div>
+
+    {publications.length === 0 ? (
+      <div class="emptyCard">
+        <p class="muted" style="margin:0;">
+          Coming soon. I’ll list peer-reviewed papers and preprints here once they are published.
+        </p>
+      </div>
+    ) : (
+      <div class="pubList">
+        {publications.map((p) => (
+          <article class="pubItem">
+            <div class="pubTop">
+              <b>{p.title}</b>
+              <span class="muted">{p.year}</span>
+            </div>
+            <p class="muted" style="margin:6px 0 0;">
+              {p.authors} &mdash; {p.venue}
+            </p>
+          </article>
+        ))}
+      </div>
+    )}
   </section>
 
   <section class="sec">
     <div class="secHead">
       <h2>Featured Projects</h2>
-      <a class="smallLink" href="/projects">See all →</a>
+      <a class="smallLink" href="/projects">See all &rarr;</a>
     </div>
 
     <div class="grid">
@@ -118,9 +250,12 @@ const featured = projects.slice(0, 3);
           </div>
 
           <div class="btns small">
-            {p.links.page && <a class="btn" href={p.links.page}>Details</a>}
+            <a class="btn" href={`/projects/${p.slug}`}>Details</a>
             {p.links.github && (
               <a class="btn" href={p.links.github} target="_blank" rel="noreferrer">GitHub</a>
+            )}
+            {p.links.paper && (
+              <a class="btn" href={p.links.paper} target="_blank" rel="noreferrer">Paper</a>
             )}
             {p.links.pdf && (
               <a class="btn" href={p.links.pdf} target="_blank" rel="noreferrer">PDF</a>
@@ -133,93 +268,87 @@ const featured = projects.slice(0, 3);
 
   <section class="sec">
     <h2>Contact</h2>
-    <p class="muted">
-      Email: <a href="mailto:kkb1198@unist.ac.kr">kkb1198@unist.ac.kr</a>
-      {" "}· GitHub:{" "}
-      <a href="https://github.com/Gibeom-KIM-02" target="_blank" rel="noreferrer">Gibeom-KIM-02</a>
+
+    <div class="contactIcons">
+      <a class="iconBtn" href="mailto:kkb1198@unist.ac.kr" aria-label="Email">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M4 6h16v12H4z" stroke="currentColor" stroke-width="1.8" />
+          <path d="M4 7l8 6 8-6" stroke="currentColor" stroke-width="1.8" />
+        </svg>
+        <span>Email</span>
+      </a>
+
+      <a
+        class="iconBtn"
+        href="https://github.com/Gibeom-KIM-02"
+        target="_blank"
+        rel="noreferrer"
+        aria-label="GitHub"
+      >
+        <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path
+            d="M12 2c5.52 0 10 4.58 10 10.24 0 4.52-2.87 8.35-6.84 9.7-.5.1-.68-.22-.68-.48v-1.7c0-.58-.2-.95-.42-1.15 1.38-.16 2.84-.7 2.84-3.2 0-.7-.24-1.28-.64-1.73.06-.16.28-.82-.06-1.7 0 0-.52-.17-1.7.66-.5-.14-1.04-.2-1.58-.2-.54 0-1.08.06-1.58.2-1.18-.83-1.7-.66-1.7-.66-.34.88-.12 1.54-.06 1.7-.4.45-.64 1.03-.64 1.73 0 2.5 1.45 3.04 2.83 3.2-.18.16-.34.44-.4.84-.36.17-1.3.48-1.86-.57 0 0-.34-.64-.98-.7 0 0-.62-.01-.04.39 0 0 .42.2.72.95 0 0 .37 1.16 2.13.78v1.24c0 .26-.18.58-.68.48C4.87 20.59 2 16.76 2 12.24 2 6.58 6.48 2 12 2Z"
+            fill="currentColor"
+          />
+        </svg>
+        <span>GitHub</span>
+      </a>
+
+      <a
+        class="iconBtn"
+        href="https://www.linkedin.com/in/gibeom-kim-0bbb68370/"
+        target="_blank"
+        rel="noreferrer"
+        aria-label="LinkedIn"
+      >
+        <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path
+            d="M6.94 6.5A1.94 1.94 0 1 1 3.06 6.5a1.94 1.94 0 0 1 3.88 0Z"
+            fill="currentColor"
+          />
+          <path d="M3.5 9h3v11h-3z" fill="currentColor" />
+          <path
+            d="M10 9h2.9v1.5h.04c.4-.76 1.38-1.56 2.84-1.56 3.04 0 3.6 2.06 3.6 4.74V20h-3v-5.5c0-1.32-.02-3.02-1.84-3.02-1.84 0-2.12 1.46-2.12 2.92V20h-3z"
+            fill="currentColor"
+          />
+        </svg>
+        <span>LinkedIn</span>
+      </a>
+
+      <a class="iconBtn" href="/google-scholar" aria-label="Google Scholar (Coming soon)">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M12 3l10 5-10 5L2 8l10-5Z" stroke="currentColor" stroke-width="1.8" />
+          <path d="M6 10v5c0 2 3 4 6 4s6-2 6-4v-5" stroke="currentColor" stroke-width="1.8" />
+        </svg>
+        <span>Scholar</span>
+      </a>
+    </div>
+
+    <p class="muted contactMeta">
+      <a href="mailto:kkb1198@unist.ac.kr">kkb1198@unist.ac.kr</a>
+      &middot;
+      <a href="https://github.com/Gibeom-KIM-02" target="_blank" rel="noreferrer">github.com/Gibeom-KIM-02</a>
     </p>
   </section>
 
-  <!-- ✅ 클릭 확대 동작 -->
-  <script is:inline>
-    const img = document.getElementById("profileImg");
-    const modal = document.getElementById("profileModal");
-    const closeBtn = modal?.querySelector(".closeBtn");
-
-    function openModal() {
-      if (!modal) return;
-      // dialog 미지원 브라우저면 새 탭으로
-      if (typeof modal.showModal !== "function") {
-        window.open("/profile.jpg", "_blank");
-        return;
-      }
-      modal.showModal();
-    }
-
-    function closeModal() {
-      if (!modal) return;
-      modal.close();
-    }
-
-    img?.addEventListener("click", openModal);
-    closeBtn?.addEventListener("click", closeModal);
-
-    // 배경 클릭하면 닫기 (img 제외)
-    modal?.addEventListener("click", (e) => {
-      if (e.target === modal) closeModal();
-    });
-  </script>
-
   <style>
     .heroRow { display: flex; gap: 14px; align-items: center; }
-
-    .avatarLink { display: inline-block; }
-
+    .avatarLink{ display:inline-block; border-radius: 12px; overflow: hidden; }
     .avatar{
       width: 130px;
       height: 160px;
       border-radius: 12px;
       object-fit: cover;
-      border: 1px solid #e7e7e7;
+      border: 1px solid rgba(0,0,0,0.08);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.06);
       background: #fff;
       display: block;
       cursor: pointer;
     }
 
-    @media (max-width: 900px) {
+    @media (max-width: 520px){
+      .heroRow { gap: 12px; }
       .avatar { width: 64px; height: 64px; }
-    }
-
-    /* ✅ dialog 모달 */
-    .imgModal{
-      border: none;
-      padding: 0;
-      border-radius: 14px;
-      max-width: min(900px, 92vw);
-      width: 92vw;
-      overflow: hidden;
-    }
-    .imgModal::backdrop{
-      background: rgba(0, 0, 0, 0.55);
-    }
-    .imgModal img{
-      display: block;
-      width: 100%;
-      height: auto;
-    }
-    .closeBtn{
-      position: absolute;
-      top: 10px;
-      right: 12px;
-      width: 34px;
-      height: 34px;
-      border: 1px solid rgba(255,255,255,0.25);
-      background: rgba(0,0,0,0.55);
-      color: #fff;
-      border-radius: 999px;
-      cursor: pointer;
-      font-size: 20px;
-      line-height: 32px;
     }
 
     .hero { padding: 34px 0 10px; }
@@ -229,7 +358,16 @@ const featured = projects.slice(0, 3);
 
     .btns { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 16px; }
     .btns.small { margin-top: 10px; }
-    .btn { border: 1px solid #ddd; padding: 10px 12px; border-radius: 10px; text-decoration: none; font-size: 14px; }
+    .btn {
+      border: 1px solid #ddd;
+      padding: 10px 12px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-size: 14px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
     .btn.primary { background: #111; color: #fff; border-color: #111; }
 
     .sec { padding: 18px 0; }
@@ -238,47 +376,103 @@ const featured = projects.slice(0, 3);
     .smallLink { font-size: 13px; opacity: 0.8; text-decoration: none; }
     .smallLink:hover { text-decoration: underline; }
 
-    .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
-    .card { border: 1px solid #e7e7e7; border-radius: 14px; padding: 14px; background: #fff; }
-    .cardTop { display:flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
-    .card h3 { margin: 0; font-size: 15px; }
-    .muted { opacity: 0.75; font-size: 13px; margin: 6px 0; }
+    .muted { opacity: 0.78; }
 
-    .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
-    .pill { font-size: 12px; border: 1px solid #eee; padding: 4px 8px; border-radius: 999px; opacity: 0.85; }
+    .exp { border: 1px solid rgba(0,0,0,0.06); border-radius: 14px; padding: 14px 16px; }
+    .expTop { display:flex; justify-content: space-between; gap: 10px; align-items: baseline; flex-wrap: wrap; }
+    .expList { margin: 10px 0 0; padding-left: 18px; }
+    .expList li { margin: 4px 0; }
 
-    .outcome {
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
+    .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+    .card { border: 1px solid rgba(0,0,0,0.06); border-radius: 14px; padding: 14px; background: #fff; }
+    .cardTop { display:flex; justify-content: space-between; gap: 10px; align-items: baseline; }
+    .cardTop h3 { margin: 0; font-size: 16px; }
+    .outcome { margin-top: 10px; }
+
+    .tags { display:flex; gap: 6px; flex-wrap: wrap; margin-top: 10px; }
+    .pill { font-size: 12px; border: 1px solid rgba(0,0,0,0.08); padding: 4px 8px; border-radius: 999px; opacity: 0.85; }
+
+    @media (max-width: 980px){
+      .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 640px){
+      .grid { grid-template-columns: 1fr; }
+      h1 { font-size: 34px; }
     }
 
-    .exp {
-      border: 1px solid #e7e7e7;
+    /* Shared icon size */
+    .icon{
+      width: 18px;
+      height: 18px;
+      display: block;
+      flex: 0 0 auto;
+    }
+
+    /* ✅ Tools */
+    .toolGrid{
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 10px;
+    }
+    .toolCard{
+      border: 1px solid rgba(0,0,0,0.06);
       border-radius: 14px;
       padding: 14px;
       background: #fff;
     }
+    .toolTitle{
+      font-weight: 600;
+      font-size: 14px;
+      opacity: 0.92;
+    }
+    @media (max-width: 980px){
+      .toolGrid{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 640px){
+      .toolGrid{ grid-template-columns: 1fr; }
+    }
 
-    .expTop {
+    /* ✅ Publications */
+    .emptyCard{
+      border: 1px solid rgba(0,0,0,0.06);
+      border-radius: 14px;
+      padding: 14px;
+      background: #fff;
+      margin-top: 10px;
+    }
+    .pubList{ display: grid; gap: 12px; margin-top: 10px; }
+    .pubItem{
+      border: 1px solid rgba(0,0,0,0.06);
+      border-radius: 14px;
+      padding: 14px;
+      background: #fff;
+    }
+    .pubTop{ display:flex; justify-content: space-between; gap: 10px; align-items: baseline; flex-wrap: wrap; }
+
+    /* Contact */
+    .contactIcons{
       display: flex;
-      flex-direction: column;
-      gap: 6px;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 10px;
     }
-
-    .expList {
-      margin: 10px 0 0;
-      padding-left: 18px;
+    .iconBtn{
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(0,0,0,0.10);
+      text-decoration: none;
+      font-size: 14px;
+      background: #fff;
     }
-
-    .expList li {
-      margin: 4px 0;
+    .iconBtn:hover{
+      border-color: rgba(0,0,0,0.18);
+      transform: translateY(-1px);
+      transition: 0.12s ease;
     }
-
-    @media (max-width: 900px) {
-      .grid { grid-template-columns: 1fr; }
-      h1 { font-size: 34px; }
-    }
+    .contactMeta{ margin: 10px 0 0; font-size: 13px; }
   </style>
 </Layout>

@@ -1,0 +1,82 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const name = "Gibeom Kim";
+
+// Later you can add items like:
+// { title, authors, venue, year, links: { doi, pdf, arxiv } }
+const publications = [];
+---
+
+<Layout
+  title={`Publications — ${name}`}
+  description="Publications and preprints."
+>
+  <section class="wrap">
+    <h1>Publications</h1>
+    <p class="muted">
+      This page will be updated as papers and preprints become available.
+    </p>
+
+    {publications.length === 0 ? (
+      <div class="emptyCard">
+        <p class="muted" style="margin:0;">
+          Coming soon. (No items to display yet.)
+        </p>
+        <div class="btns">
+          <a class="btn primary" href="/">Back to Home</a>
+          <a class="btn" href="/google-scholar">Google Scholar (soon)</a>
+        </div>
+      </div>
+    ) : (
+      <div class="pubList">
+        {publications.map((p) => (
+          <article class="pubItem">
+            <div class="pubTop">
+              <b>{p.title}</b>
+              <span class="muted">{p.year}</span>
+            </div>
+            <p class="muted" style="margin:6px 0 0;">
+              {p.authors} &mdash; {p.venue}
+            </p>
+
+            {p.links && (
+              <div class="btns" style="margin-top:10px;">
+                {p.links.doi && <a class="btn" href={p.links.doi} target="_blank" rel="noreferrer">DOI</a>}
+                {p.links.pdf && <a class="btn" href={p.links.pdf} target="_blank" rel="noreferrer">PDF</a>}
+                {p.links.arxiv && <a class="btn" href={p.links.arxiv} target="_blank" rel="noreferrer">arXiv</a>}
+              </div>
+            )}
+          </article>
+        ))}
+      </div>
+    )}
+  </section>
+
+  <style>
+    .wrap { padding: 34px 0; }
+    h1 { font-size: 34px; margin: 0 0 10px; letter-spacing: -0.02em; }
+    .muted { opacity: 0.78; max-width: 72ch; }
+
+    .emptyCard{
+      border: 1px solid rgba(0,0,0,0.06);
+      border-radius: 14px;
+      padding: 16px;
+      background: #fff;
+      margin-top: 12px;
+    }
+
+    .pubList{ display: grid; gap: 12px; margin-top: 12px; }
+    .pubItem{
+      border: 1px solid rgba(0,0,0,0.06);
+      border-radius: 14px;
+      padding: 14px;
+      background: #fff;
+    }
+    .pubTop{ display:flex; justify-content: space-between; gap: 10px; align-items: baseline; flex-wrap: wrap; }
+
+    .btns { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 12px; }
+    .btn { border: 1px solid #ddd; padding: 10px 12px; border-radius: 10px; text-decoration: none; font-size: 14px; }
+    .btn.primary { background: #111; color: #fff; border-color: #111; }
+  </style>
+</Layout>

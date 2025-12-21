@@ -1,0 +1,59 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const name = "Gibeom Kim";
+---
+
+<Layout
+  title={`Google Scholar — ${name}`}
+  description="Google Scholar profile page (coming soon)."
+>
+  <section class="wrap">
+    <h1>Google Scholar</h1>
+    <p class="muted">
+      Coming soon. I’ll link my official Google Scholar profile here once it’s ready.
+    </p>
+
+    <div class="card">
+      <p class="muted" style="margin:0;">
+        If you reached this page from the homepage, that link is intentionally parked here for now.
+      </p>
+
+      <div class="btns">
+        <a class="btn primary" href="/">Back to Home</a>
+        <a
+          class="btn"
+          href="https://www.linkedin.com/in/gibeom-kim-0bbb68370/"
+          target="_blank"
+          rel="noreferrer"
+        >
+          LinkedIn
+        </a>
+        <a
+          class="btn"
+          href="https://github.com/Gibeom-KIM-02"
+          target="_blank"
+          rel="noreferrer"
+        >
+          GitHub
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <style>
+    .wrap { padding: 34px 0; }
+    h1 { font-size: 34px; margin: 0 0 10px; letter-spacing: -0.02em; }
+    .muted { opacity: 0.78; max-width: 72ch; }
+    .card {
+      margin-top: 16px;
+      border: 1px solid rgba(0,0,0,0.06);
+      border-radius: 14px;
+      padding: 16px;
+      background: #fff;
+    }
+    .btns { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 14px; }
+    .btn { border: 1px solid #ddd; padding: 10px 12px; border-radius: 10px; text-decoration: none; font-size: 14px; }
+    .btn.primary { background: #111; color: #fff; border-color: #111; }
+  </style>
+</Layout>
