@@ -11,7 +11,7 @@ const BASE = RAW_BASE.endsWith("/") ? RAW_BASE : `${RAW_BASE}/`;
 const withBase = (p) => `${BASE}${String(p).replace(/^\/+/, "")}`;
 
 // Put the file here: public/projects/hf.png
-const heroImage = withBase("projects/hf.png");
+const heroImage = withBase("projects/hf.jpg");
 ---
 
 <Layout title={`${title} - Gibeom Kim`} description="A modular Hartree-Fock implementation in Python focused on clarity and validation.">
@@ -52,7 +52,6 @@ const heroImage = withBase("projects/hf.png");
     <section class="sec">
       <h2>Figure</h2>
       <p class="muted">
-        Place the figure at <code>public/projects/hf.png</code>.
       </p>
       <div class="imgWrap">
         <img src={heroImage} alt="HF project figure" loading="lazy" />

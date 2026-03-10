@@ -11,7 +11,7 @@ const BASE = RAW_BASE.endsWith("/") ? RAW_BASE : `${RAW_BASE}/`;
 const withBase = (p) => `${BASE}${String(p).replace(/^\/+/, "")}`;
 
 // Put the file here: public/projects/bandgap-cgcnn.png
-const heroImage = withBase("projects/bandgap-cgcnn.png");
+const heroImage = withBase("projects/bandgap-cgcnn.jpg");
 ---
 
 <Layout title={`${title} - Gibeom Kim`} description="Trained and evaluated a CGCNN-based model to predict bandgaps of hexanary oxides.">
@@ -63,7 +63,7 @@ const heroImage = withBase("projects/bandgap-cgcnn.png");
     <section class="sec">
       <h2>Figure</h2>
       <p class="muted">
-        Place the figure at <code>public/projects/bandgap-cgcnn.png</code>.
+
       </p>
       <div class="imgWrap">
         <img src={heroImage} alt="Bandgap CGCNN figure" loading="lazy" />
@@ -111,7 +111,19 @@ cd Predicting-bandgap-of-Hexanary-oxide</code></pre>
     pre { margin: 8px 0 0; padding: 10px 12px; border-radius: 12px; background: #fafafa; border: 1px solid #eee; overflow:auto; }
     code { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace; font-size: 12px; }
 
-    .imgWrap { border: 1px solid #e7e7e7; border-radius: 14px; overflow: hidden; background: #fff; }
-    .imgWrap img { width: 100%; height: auto; display:block; }
-  </style>
+    .imgWrap {
+      border: 1px solid #e7e7e7;
+      border-radius: 14px;
+      overflow: hidden;
+      background: #fff;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+  
+    .imgWrap img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+  </style>    
 </Layout>
