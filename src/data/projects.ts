@@ -1,4 +1,5 @@
 export type Project = {
+  slug: string;  
   title: string;
   period?: string;      // e.g., "2025"
   oneLiner: string;     // short summary
@@ -27,6 +28,20 @@ export const projects: Project[] = [
     links: {
       page: "/projects/lammps-input-generator",
       github: "https://github.com/Gibeom-KIM-02/lammps_input_generator",
+    },
+  },
+  {
+    slug: "packmol-runner",
+    title: "Packmol Runner",
+    period: "2026",
+    oneLiner: "A YAML-driven workflow to build molecular simulation starting structures using Packmol and ASE.",
+    role: "Designed and organized a reproducible packing workflow for bulk boxes and slab-based systems with configurable inputs and automation scripts.",
+    outcome: "Built a reusable structure-generation pipeline that reduces manual setup and improves consistency across simulation systems.",
+    outcomeShort: "Built a reusable Packmol/ASE workflow for reproducible simulation structure generation.",
+    tags: ["Packmol", "ASE", "LAMMPS", "Automation", "Reproducibility"],
+    links: {
+      page: "/projects/packmol-runner",
+      github: "https://github.com/Gibeom-KIM-02/packmol_runner",
     },
   },
   {
