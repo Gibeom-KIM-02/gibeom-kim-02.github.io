@@ -20,6 +20,14 @@ const toolGroups = [
 
 const publications: any[] = [];
 
+const awards = [
+  {
+    title: "Samsung Humantech Paper Awards",
+    prize: "Gold Prize",
+    recipients: "Jinki Hong, Subin Lee, Gibeom Kim",
+  },
+];
+
 // Base-path helper (GitHub Pages repo site support)
 const RAW_BASE = import.meta.env.BASE_URL ?? "/";
 const BASE = RAW_BASE.endsWith("/") ? RAW_BASE : `${RAW_BASE}/`;
@@ -189,6 +197,24 @@ function detailsPath(p: any): string {
           <div class="toolTitle">{g.title}</div>
           <div class="tags">{g.items.map((t) => <span class="pill">{t}</span>)}</div>
         </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="sec">
+    <h2>Honors &amp; Awards</h2>
+
+    <div class="pubList">
+      {awards.map((a) => (
+        <article class="pubItem">
+          <div class="pubTop">
+            <b>{a.title}</b>
+            <span class="muted">{a.prize}</span>
+          </div>
+          <p class="muted" style="margin:6px 0 0;">
+            {a.recipients}
+          </p>
+        </article>
       ))}
     </div>
   </section>
