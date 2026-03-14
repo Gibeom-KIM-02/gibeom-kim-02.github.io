@@ -24,7 +24,11 @@ const awards = [
   {
     title: "Samsung Humantech Paper Awards",
     prize: "Gold Prize",
-    recipients: "Jinki Hong, Subin Lee, Gibeom Kim",
+    section: "Energy & Environment",
+    recipients: "Jinki Hong, Subin Lee, Gibeom Kim (UNIST)",
+    paperTitle:
+      "Selective F-Diluent Exclusion by Siloxane Co-diluents for Stable Interphases in Lithium Metal Batteries",
+    date: "February 11, 2026",
   },
 ];
 
@@ -201,23 +205,32 @@ function detailsPath(p: any): string {
     </div>
   </section>
 
-  <section class="sec">
-    <h2>Honors &amp; Awards</h2>
+<section class="sec">
+  <h2>Honors &amp; Awards</h2>
 
-    <div class="pubList">
-      {awards.map((a) => (
-        <article class="pubItem">
-          <div class="pubTop">
-            <b>{a.title}</b>
-            <span class="muted">{a.prize}</span>
-          </div>
-          <p class="muted" style="margin:6px 0 0;">
-            {a.recipients}
-          </p>
-        </article>
-      ))}
-    </div>
-  </section>
+  <div class="pubList">
+    {awards.map((a) => (
+      <article class="pubItem">
+        <div class="pubTop">
+          <b>{a.title}</b>
+          <span class="muted">{a.prize}</span>
+        </div>
+        <p class="muted" style="margin:6px 0 0;">
+          <b>Section:</b> {a.section}
+        </p>
+        <p class="muted" style="margin:6px 0 0;">
+          <b>Recipients:</b> {a.recipients}
+        </p>
+        <p class="muted" style="margin:6px 0 0;">
+          <b>Paper:</b> {a.paperTitle}
+        </p>
+        <p class="muted" style="margin:6px 0 0;">
+          {a.date}
+        </p>
+      </article>
+    ))}
+  </div>
+</section>
 
   <section class="sec">
     <div class="secHead">
