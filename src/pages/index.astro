@@ -213,7 +213,7 @@ function detailsPath(p: any): string {
       <article class="pubItem">
         <div class="pubTop">
           <b>{a.title}</b>
-          <span class="muted">{a.prize}</span>
+          <span class="muted prizeGold">{a.prize}</span>
         </div>
         <p class="muted" style="margin:6px 0 0;">
           <b>Section:</b> {a.section}
@@ -474,6 +474,12 @@ function detailsPath(p: any): string {
       background: #fff;
     }
     .pubTop{ display:flex; justify-content: space-between; gap: 10px; align-items: baseline; flex-wrap: wrap; }
+
+    .prizeGold{
+      color: #c99700;
+      font-weight: 700;
+      opacity: 1;
+    }
 
     .contactIcons{
       display: flex;
