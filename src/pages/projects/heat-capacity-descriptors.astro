@@ -1,0 +1,127 @@
+---
+import Layout from "../../layouts/Layout.astro";
+
+const title = "Predicting Heat Capacity with Molecular Descriptors";
+const period = "2026";
+const tags = ["Machine Learning", "RDKit", "SMILES", "ThermoML", "Data Pipeline"];
+const repo = "https://github.com/Gibeom-KIM-02/Predicting_Heat_Capacity";
+
+const RAW_BASE = import.meta.env.BASE_URL ?? "/";
+const BASE = RAW_BASE.endsWith("/") ? RAW_BASE : `${RAW_BASE}/`;
+const withBase = (p) => `${BASE}${String(p).replace(/^\/+/, "")}`;
+
+// Put the file here: public/projects/heat-capacity-descriptors.png
+const heroImage = withBase("projects/heat-capacity-descriptors.png");
+---
+
+<Layout title={`${title} - Gibeom Kim`} description="An end-to-end workflow for chemical heat-capacity prediction using SMILES-derived molecular descriptors.">
+  <a class="back" href={withBase("projects/")}>Back to Projects</a>
+
+  <header class="hero">
+    <div class="titleRow">
+      <h1>{title}</h1>
+      <span class="muted">{period}</span>
+    </div>
+
+    <div class="tags">
+      {tags.map((t) => <span class="pill">{t}</span>)}
+    </div>
+
+    <p class="lead">
+      This project builds a reproducible machine-learning workflow for predicting the
+      constant-pressure heat capacity, Cp, of chemical compounds. A key focus was expanding
+      and polishing the dataset from external sources and representing molecules using
+      descriptors calculated directly from SMILES.
+    </p>
+
+    <div class="btns">
+      <a class="btn primary" href={repo} target="_blank" rel="noreferrer">GitHub</a>
+    </div>
+  </header>
+
+  <section class="sec">
+    <h2>What it does</h2>
+    <div class="card">
+      <ul class="muted list">
+        <li>Extracts and organizes heat-capacity data from NIST/ThermoML and other external sources.</li>
+        <li>Merges, cleans, and deduplicates datasets into a model-ready Cp dataset.</li>
+        <li>Predicts Cp using molecular descriptors computed from SMILES in a reproducible ML workflow.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="sec">
+    <h2>My role</h2>
+    <div class="card">
+      <p class="muted">
+        Designed the end-to-end workflow from data extraction to final prediction. Built the
+        NIST/ThermoML parsing pipeline, organized dataset polishing and integration steps,
+        evaluated descriptor/model combinations, and developed the final Cp prediction workflow.
+      </p>
+    </div>
+  </section>
+
+  <section class="sec">
+    <h2>Technical highlights</h2>
+    <div class="card">
+      <ul class="muted list">
+        <li>Structured pipeline for raw, clean, and representative Cp datasets.</li>
+        <li>Descriptor-based featurization using RDKit from SMILES.</li>
+        <li>Final regression workflow with model interpretation and prediction from compound name or SMILES.</li>
+      </ul>
+    </div>
+  </section>
+
+  {heroImage ? (
+    <section class="sec">
+      <h2>Figure</h2>
+      <div class="imgWrap">
+        <img src={heroImage} alt="Heat capacity prediction workflow figure" loading="lazy" />
+      </div>
+    </section>
+  ) : null}
+
+  <section class="sec">
+    <h2>How to run</h2>
+    <div class="card">
+      <pre><code>git clone {repo}
+cd Predicting_Heat_Capacity</code></pre>
+      <p class="muted" style="margin-top:10px;">
+        See the repository README for environment setup, dataset-building steps, model training, and inference workflow.
+      </p>
+    </div>
+  </section>
+
+  <style>
+    .back { display:inline-block; margin: 8px 0 18px; text-decoration:none; font-size: 13px; opacity: .8; }
+    .back:hover { text-decoration: underline; }
+
+    .hero { padding: 6px 0 18px; }
+    .titleRow { display:flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; align-items: baseline; }
+
+    h1 { margin: 0; font-size: 26px; letter-spacing: -0.02em; }
+    h2 { margin: 0 0 10px; font-size: 18px; }
+
+    .lead { margin: 10px 0 0; max-width: 80ch; opacity: .85; }
+    .muted { opacity: .75; font-size: 13px; margin: 6px 0; }
+
+    .btns { display:flex; gap: 10px; flex-wrap: wrap; margin-top: 14px; }
+    .btn { border: 1px solid #ddd; padding: 10px 12px; border-radius: 10px; text-decoration: none; font-size: 14px; }
+    .btn.primary { background: #111; color: #fff; border-color: #111; }
+
+    .sec { padding: 16px 0; }
+    .card { border: 1px solid #e7e7e7; border-radius: 14px; padding: 14px; background: #fff; }
+
+    .tags { display:flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+    .pill { font-size: 12px; border: 1px solid #eee; padding: 4px 8px; border-radius: 999px; opacity: .85; }
+
+    .list { margin: 8px 0 0; padding-left: 18px; }
+    .list li { margin: 6px 0; }
+
+    pre { margin: 8px 0 0; padding: 10px 12px; border-radius: 12px; background: #fafafa; border: 1px solid #eee; overflow:auto; }
+    code { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace; font-size: 12px; }
+
+    .imgWrap { border: 1px solid #e7e7e7; border-radius: 14px; overflow: hidden; background: #fff; }
+    .imgWrap img { width: 100%; height: auto; display:block; }
+  </style>
+</Layout>

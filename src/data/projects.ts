@@ -45,6 +45,20 @@ export const projects: Project[] = [
     },
   },
   {
+    slug: "heat-capacity-descriptors",
+    title: "Predicting Heat Capacity with Molecular Descriptors",
+    period: "2026",
+    oneLiner: "Built an end-to-end workflow to collect chemical heat-capacity data and predict Cp using descriptors derived from SMILES.",
+    role: "Developed the pipeline for extracting and polishing thermophysical-property data from NIST/ThermoML and other sources, evaluated descriptor/model combinations, and built the final Cp prediction workflow.",
+    outcome: "Created a reproducible machine-learning workflow that connects chemical data extraction, descriptor-based featurization, and Cp prediction from compound name or SMILES.",
+    outcomeShort: "Built a reproducible workflow for Cp prediction from SMILES-derived molecular descriptors.",
+    tags: ["Machine Learning", "RDKit", "SMILES", "ThermoML", "Data Pipeline"],
+    links: {
+      page: "/projects/heat-capacity-descriptors",
+      github: "https://github.com/Gibeom-KIM-02/Predicting_Heat_Capacity",
+    },
+  },
+  {
     slug: "bandgap-cgcnn",
     title: "Predicting Bandgap of Hexanary Oxides (CGCNN)",
     period: "2025",
