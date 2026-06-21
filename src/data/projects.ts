@@ -5,7 +5,7 @@ export type Project = {
   oneLiner: string;     // short summary
   role: string;         // what you did
   outcome: string;      // impact/result
-  outcomeShort?: string; // home 카드용 짧은 outcome (1문장)
+  outcomeShort?: string; // short outcome for home/project cards
   tags: string[];
   links: {
     page?: string;      // internal detail page (optional, later)
@@ -21,7 +21,7 @@ export const projects: Project[] = [
     title: "LAMMPS Input Generator",
     period: "2025",
     oneLiner: "A configurable generator to build reproducible LAMMPS inputs for simulation workflows.",
-    role: "Designed a structured input-generation pipeline and organized simulation settings for reuse across systems.",
+    role: "Architected a configuration-driven input-generation workflow that turns structured simulation settings into reusable, reproducible LAMMPS inputs.",
     outcome: "Standardized inputs to reduce manual editing and improve reproducibility.",
     outcomeShort: "Standardized LAMMPS inputs to reduce manual edits and improve reproducibility.",
     tags: ["LAMMPS", "MD", "Automation", "Reproducibility"],
@@ -35,7 +35,7 @@ export const projects: Project[] = [
     title: "Packmol Runner",
     period: "2026",
     oneLiner: "A YAML-driven workflow to build molecular simulation starting structures using Packmol and ASE.",
-    role: "Designed and organized a reproducible packing workflow for bulk boxes and slab-based systems with configurable inputs and automation scripts.",
+    role: "Designed a YAML-driven structure-generation pipeline for bulk and slab systems, integrating Packmol and ASE to support reproducible simulation setup.",
     outcome: "Built a reusable structure-generation pipeline that reduces manual setup and improves consistency across simulation systems.",
     outcomeShort: "Built a reusable Packmol/ASE workflow for reproducible simulation structure generation.",
     tags: ["Packmol", "ASE", "LAMMPS", "Automation", "Reproducibility"],
@@ -45,11 +45,28 @@ export const projects: Project[] = [
     },
   },
   {
+    slug: "three-tank-dqn-water-level-control",
+    title: "Three-Tank Water Level Control with DQN",
+    period: "2026",
+    oneLiner:
+      "Applied DQN reinforcement learning to regulate water level in a three-tank system with camera-based sensing and pump control.",
+    role: "Built the end-to-end control workflow, from YOLO-based water-level sensing and Arduino pump actuation to learned pump dynamics, DQN training, and evaluation.",
+    outcome:
+      "Built a modular control pipeline from hardware data collection to DQN training and evaluation; global simulation evaluation reported 100% scenario/phase pass rates across 1,960 cases with mean RMS error around 0.265 cm.",
+    outcomeShort:
+      "Built a DQN water-level controller with a learned pump dynamics model and evaluated it across simulation scenarios.",
+    tags: ["Reinforcement Learning", "DQN", "Control", "YOLO", "PyTorch"],
+    links: {
+      page: "/projects/three-tank-dqn-water-level-control",
+      github: "https://github.com/Gibeom-KIM-02/three_tank_dqn_water_level_control",
+    },
+  },
+  {
     slug: "heat-capacity-descriptors",
     title: "Predicting Heat Capacity with Molecular Descriptors",
     period: "2026",
     oneLiner: "Built an end-to-end workflow to collect chemical heat-capacity data and predict Cp using descriptors derived from SMILES.",
-    role: "Developed the pipeline for extracting and polishing thermophysical-property data from NIST/ThermoML and other sources, evaluated descriptor/model combinations, and built the final Cp prediction workflow.",
+    role: "Developed the data-to-model pipeline for Cp prediction, including ThermoML/NIST data extraction, dataset curation, descriptor generation, model evaluation, and inference workflow design.",
     outcome: "Created a reproducible machine-learning workflow that connects chemical data extraction, descriptor-based featurization, and Cp prediction from compound name or SMILES.",
     outcomeShort: "Built a reproducible workflow for Cp prediction from SMILES-derived molecular descriptors.",
     tags: ["Machine Learning", "RDKit", "SMILES", "ThermoML", "Data Pipeline"],
@@ -64,7 +81,7 @@ export const projects: Project[] = [
     period: "2025",
     oneLiner:
       "Trained and evaluated a CGCNN-based model to predict bandgaps of hexanary oxides for photocatalyst discovery.",
-    role: "Prepared crystal-structure datasets, built training/evaluation workflow, and ran experiments for model performance.",
+    role: "Prepared crystal-structure datasets, established the CGCNN training/evaluation workflow, and ran targeted experiments to improve low-bandgap prediction performance.",
     outcome: "Built a reproducible pipeline from structure data to bandgap predictions.",
     outcomeShort: "Built a reproducible pipeline from structures to bandgap predictions using CGCNN.",
     tags: ["Materials ML", "CGCNN", "Bandgap", "Python"],
@@ -78,8 +95,8 @@ export const projects: Project[] = [
     title: "Hartree–Fock in Python (Modular Implementation)",
     period: "2025",
     oneLiner: "A modular Hartree–Fock implementation in Python focused on clarity, validation, and extensibility.",
-    role: "Implemented core HF modules (basis, integrals, SCF loop, energies) with detailed comments and testable structure.",
-    outcome: "Calculate Hartree-Fock Energy for H-H atom binding energy",
+    role: "Implemented the core Hartree-Fock components, including basis handling, integral construction, SCF iteration, energy evaluation, and validation on simple molecular systems.",
+    outcome: "Calculated Hartree-Fock energies for simple atomic and molecular test systems, including H-H binding-energy validation.",
     outcomeShort: "Implemented a modular HF codebase designed for clarity, validation, and extensions.",
     tags: ["Quantum Chemistry", "Hartree–Fock", "Python", "Numerical"],
     links: {

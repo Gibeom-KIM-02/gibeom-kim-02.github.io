@@ -1,0 +1,178 @@
+---
+import Layout from "../../layouts/Layout.astro";
+
+const title = "Three-Tank Water Level Control with DQN";
+const period = "2026";
+const tags = ["Reinforcement Learning", "DQN", "Control", "YOLO", "PyTorch"];
+const repo = "https://github.com/Gibeom-KIM-02/three_tank_dqn_water_level_control";
+
+const RAW_BASE = import.meta.env.BASE_URL ?? "/";
+const BASE = RAW_BASE.endsWith("/") ? RAW_BASE : `${RAW_BASE}/`;
+const withBase = (p) => `${BASE}${String(p).replace(/^\/+/, "")}`;
+
+const heroImage = withBase("projects/three-tank-dqn-water-level-control.png");
+
+const metrics = [
+  { label: "Scenario pass rate", value: "100%" },
+  { label: "Phase pass rate", value: "100%" },
+  { label: "Mean RMS error", value: "0.265 cm" },
+  { label: "P95 settling time", value: "90 s" },
+];
+---
+
+<Layout
+  title={`${title} - Gibeom Kim`}
+  description="A DQN reinforcement-learning controller for water-level regulation in a three-tank system."
+>
+  <a class="back" href={withBase("projects/")}>Back to Projects</a>
+
+  <header class="hero">
+    <div class="titleRow">
+      <h1>{title}</h1>
+      <span class="muted">{period}</span>
+    </div>
+
+    <div class="tags">
+      {tags.map((t) => <span class="pill">{t}</span>)}
+    </div>
+
+    <p class="lead">
+      A reinforcement-learning control project for a three-tank water-level system. The pipeline connects
+      camera-based water-level sensing, Arduino pump control, learned pump dynamics, DQN training, and
+      final controller evaluation.
+    </p>
+
+    <div class="btns">
+      <a class="btn primary" href={repo} target="_blank" rel="noreferrer">GitHub</a>
+    </div>
+  </header>
+
+  <section class="sec">
+    <h2>What it does</h2>
+    <div class="card">
+      <ul class="muted list">
+        <li>Collects real hardware response data using YOLO-based water-level detection and Arduino pump control.</li>
+        <li>Trains a learned pump dynamics model from preprocessed water-level response data.</li>
+        <li>Builds a DQN environment and controller for tracking target water levels under changing setpoints.</li>
+        <li>Evaluates the trained controller in simulation and provides a runtime loop for real hardware tests.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="sec">
+    <h2>Contributions</h2>
+    <div class="card">
+      <p class="muted">
+        Built the end-to-end reinforcement-learning control workflow, covering hardware response data collection,
+        YOLO-based water-level sensing, Arduino pump actuation, learned pump-dynamics modeling, DQN controller
+        training, simulation evaluation, and the real-hardware execution loop.
+      </p>
+    </div>
+  </section>
+
+  <section class="sec">
+    <h2>Performance snapshot</h2>
+    <div class="metricGrid">
+      {metrics.map((m) => (
+        <div class="metricCard">
+          <b>{m.value}</b>
+          <span>{m.label}</span>
+        </div>
+      ))}
+    </div>
+    <p class="muted note">
+      Summary from the repository's global controller evaluation over 1,960 simulated cases.
+    </p>
+  </section>
+
+  <section class="sec">
+    <h2>Figure</h2>
+    <div class="imgWrap">
+      <img src={heroImage} alt="DQN water-level controller evaluation trace" loading="lazy" />
+    </div>
+  </section>
+
+  <section class="sec">
+    <h2>How to run</h2>
+    <div class="card">
+      <pre><code>git clone {repo}
+cd three_tank_dqn_water_level_control
+cd RL_code
+python train_dynamics_model.py
+python train_dqn_controller.py --episodes 800 --plot
+python evaluate_dqn_controller.py --plot</code></pre>
+      <p class="muted" style="margin-top:10px;">
+        See the repository README for environment setup, data collection, and real-hardware controller commands.
+      </p>
+    </div>
+  </section>
+
+  <style>
+    .back { display:inline-block; margin: 8px 0 18px; text-decoration:none; font-size: 13px; opacity: .8; }
+    .back:hover { text-decoration: underline; }
+
+    .hero { padding: 6px 0 18px; }
+    .titleRow { display:flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; align-items: baseline; }
+
+    h1 { margin: 0; font-size: 26px; letter-spacing: -0.02em; }
+    h2 { margin: 0 0 10px; font-size: 18px; }
+
+    .lead { margin: 10px 0 0; max-width: 80ch; opacity: .85; }
+    .muted { opacity: .75; font-size: 13px; margin: 6px 0; }
+
+    .btns { display:flex; gap: 10px; flex-wrap: wrap; margin-top: 14px; }
+    .btn { border: 1px solid #ddd; padding: 10px 12px; border-radius: 10px; text-decoration: none; font-size: 14px; }
+    .btn.primary { background: #111; color: #fff; border-color: #111; }
+
+    .sec { padding: 16px 0; }
+    .card { border: 1px solid #e7e7e7; border-radius: 14px; padding: 14px; background: #fff; }
+
+    .tags { display:flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+    .pill { font-size: 12px; border: 1px solid #eee; padding: 4px 8px; border-radius: 999px; opacity: .85; }
+
+    .list { margin: 8px 0 0; padding-left: 18px; }
+    .list li { margin: 6px 0; }
+
+    .metricGrid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .metricCard {
+      border: 1px solid #e7e7e7;
+      border-radius: 14px;
+      padding: 14px;
+      background: #fff;
+    }
+    .metricCard b {
+      display: block;
+      font-size: 20px;
+      line-height: 1.2;
+    }
+    .metricCard span {
+      display: block;
+      margin-top: 6px;
+      font-size: 12px;
+      opacity: .68;
+    }
+    .note { margin-top: 10px; }
+
+    pre { margin: 8px 0 0; padding: 10px 12px; border-radius: 12px; background: #fafafa; border: 1px solid #eee; overflow:auto; }
+    code { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace; font-size: 12px; }
+
+    .imgWrap {
+      border: 1px solid #e7e7e7;
+      border-radius: 14px;
+      overflow: hidden;
+      background: #fff;
+    }
+    .imgWrap img { width: 100%; height: auto; display:block; }
+
+    @media (max-width: 860px){
+      .metricGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 520px){
+      .metricGrid { grid-template-columns: 1fr; }
+    }
+  </style>
+</Layout>
